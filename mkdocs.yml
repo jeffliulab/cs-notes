@@ -23,9 +23,9 @@ theme:
 
 nav:
   - 首页: index.md
-  - Algorithms:
+  - 算法导论:
     - Ch1.序言与概论: CLRS/intro.md 
-  - Networks:
+  - 计算机网络:
     - Ch1.序言与概论: networks/intro.md 
   - 计算理论:
     - Ch1.序言与概论: computational_theory/ch0_intro.md
