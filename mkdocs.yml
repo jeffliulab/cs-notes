@@ -1,0 +1,49 @@
+site_name: 刘杰夫的计算机科学笔记
+site_author: 刘杰夫
+site_url: https://jeffliulab.github.io/cs-notes/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    # - navigation.expand
+
+# plugins:
+#   - search 注意如果没有plugins命令，search功能是默认启动的；但如果启用plugins，则可能会被覆盖掉。
+#   - i18n: # https://ultrabug.github.io/mkdocs-static-i18n/fr/getting-started/quick-start/
+#       docs_structure: suffix
+#       languages:
+#         - locale: en
+#           default: true
+#           name: English
+#           build: true
+#         - locale: zh
+#           name: 中文
+#           build: true
+
+nav:
+  - 首页: index.md
+  - Algorithms:
+    - Ch1.序言与概论: CLRS/intro.md 
+  - Networks:
+    - Ch1.序言与概论: networks/intro.md 
+  - 计算理论:
+    - Ch1.序言与概论: computational_theory/ch0_intro.md
+    - Ch2.正则语言: computational_theory/ch1_regular_languages.md
+
+
+
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
+  - stylesheets/extra.css

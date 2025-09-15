@@ -1,0 +1,135 @@
+# ------------------------------------------------------------------------------
+#  .gitattributes 说明
+# ------------------------------------------------------------------------------
+# 作用：
+# - 统一并显式约定仓库中的换行符与文件类型处理，避免跨平台协作时出现
+#   “LF 将被替换为 CRLF” 等警告，减少无意义的 diff。
+# - 规则优先级：.gitattributes > 用户本地的 core.autocrlf。
+#   即使每个人的 Git 全局配置不同，本文件也能保证项目一致性。
+#
+# 核心策略（本仓库）：
+# - 默认所有「文本文件」在仓库存储为 LF（Unix 风格）。
+# - Windows 专用脚本（如 .bat/.cmd/.ps1）在工作区强制使用 CRLF，便于本地使用。
+# - 常见二进制文件标记为 -text，防止被当作文本处理（不会被换行规范化）。
+#
+# 各系统下的表现：
+# - 远端仓库（云端）：文本统一保存为 LF，历史记录干净、可移植。
+# - Linux / macOS：工作区与仓库一致，文本为 LF；不出现行尾转换警告。
+# - Windows：
+#   * 一般文本：checkout 时可得到符合平台的行尾（视规则与 Git 配置），提交时规范回 LF；
+#   * 指定为 CRLF 的脚本（.bat/.cmd/.ps1）：始终以 CRLF 呈现在工作区，避免执行问题；
+#   * 提交后，仓库仍保持 LF（除非该类型被明确指定为 CRLF）。
+#
+# 何时需要“规范化”已存在的文件：
+# - 初次添加本文件或修改行尾策略后，建议执行一次重规范化：
+#     git add --renormalize .
+#     git commit -m "Normalize line endings via .gitattributes"
+#
+# 小贴士：
+# - 若需为某类文件固定行尾，可加：  <pattern> text eol=lf  或  eol=crlf
+# - 若文件为二进制或不应做行尾转换，加： <pattern> -text
+# ------------------------------------------------------------------------------
+
+
+# ---------- 基础策略：文本用 LF，自动规范化 ----------
+# 仓库内一律规范为 LF；checkout 时按平台需要转换
+* text=auto eol=lf
+
+# ---------- 常见文本文件（强制 LF） ----------
+# 代码
+*.c     text eol=lf
+*.h     text eol=lf
+*.cpp   text eol=lf
+*.hpp   text eol=lf
+*.cc    text eol=lf
+*.java  text eol=lf
+*.cs    text eol=lf
+*.go    text eol=lf
+*.py    text eol=lf
+*.rb    text eol=lf
+*.php   text eol=lf
+*.rs    text eol=lf
+*.kt    text eol=lf
+*.m     text eol=lf
+*.mm    text eol=lf
+*.swift text eol=lf
+*.js    text eol=lf
+*.jsx   text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
+
+# 脚本/构建
+*.sh        text eol=lf
+Makefile    text eol=lf
+makefile    text eol=lf
+*.mk        text eol=lf
+CMakeLists.txt text eol=lf
+*.cmake     text eol=lf
+
+# 文档/标记/配置
+*.md     text eol=lf
+*.txt    text eol=lf
+*.csv    text eol=lf
+*.json   text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.toml   text eol=lf
+*.ini    text eol=lf
+*.cfg    text eol=lf
+*.xml    text eol=lf
+*.html   text eol=lf
+*.css    text eol=lf
+*.scss   text eol=lf
+
+# LaTeX（你项目里用到）
+*.tex    text eol=lf
+*.bib    text eol=lf
+*.cls    text eol=lf
+*.sty    text eol=lf
+
+# ---------- Windows 专用脚本（强制 CRLF，本地更可读） ----------
+*.bat    text eol=crlf
+*.cmd    text eol=crlf
+*.ps1    text eol=crlf
+
+# ---------- 常见二进制与不可转换文件（禁止当作文本处理） ----------
+# 图片
+*.png  -text
+*.jpg  -text
+*.jpeg -text
+*.gif  -text
+*.bmp  -text
+*.ico  -text
+*.svg  -text
+# 压缩/包
+*.zip  -text
+*.gz   -text
+*.tgz  -text
+*.bz2  -text
+*.7z   -text
+*.rar  -text
+# 文档（Office/PDF 等）
+*.pdf  -text
+*.doc  -text
+*.docx -text
+*.ppt  -text
+*.pptx -text
+*.xls  -text
+*.xlsx -text
+# 字节码/可执行
+*.class -text
+*.jar   -text
+*.war   -text
+*.exe   -text
+*.dll   -text
+*.so    -text
+*.dylib -text
+*.o     -text
+*.a     -text
+*.lib   -text
+
+# ---------- 其他 ----------
+# git 相关文本也按 LF
+.gitattributes text eol=lf
+.gitignore     text eol=lf
+.editorconfig  text eol=lf
