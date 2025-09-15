@@ -1,0 +1,863 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="刘杰夫">
+      
+      
+        <link rel="canonical" href="https://jeffliulab.github.io/cs-notes/computational_theory/ch0_intro/">
+      
+      
+        <link rel="prev" href="../../networks/intro/">
+      
+      
+        <link rel="next" href="../ch1_regular_languages/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Ch1.序言与概论 - 刘杰夫的计算机科学笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="刘杰夫的计算机科学笔记" class="md-header__button md-logo" aria-label="刘杰夫的计算机科学笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            刘杰夫的计算机科学笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ch1.序言与概论
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="刘杰夫的计算机科学笔记" class="md-nav__button md-logo" aria-label="刘杰夫的计算机科学笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    刘杰夫的计算机科学笔记
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    算法导论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            算法导论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CLRS/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算机网络
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            计算机网络
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../networks/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算理论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            计算理论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cs170-syllabus" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS170 Syllabus
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      主题介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学工具
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      课程规范证明示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="课程规范证明示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-induction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 1 (Induction)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 2 (Construction)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch1_regular_languages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch2.正则语言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cs170-syllabus" class="md-nav__link">
+    <span class="md-ellipsis">
+      CS170 Syllabus
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      主题介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学工具
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      课程规范证明示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="课程规范证明示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-induction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 1 (Induction)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 2 (Construction)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">计算理论绪论</h1>
+<h2 id="cs170-syllabus">CS170 Syllabus</h2>
+<p>这门课和我未来方向不太匹配，但是是必修，所以尽可能把学习时间缩短并保证成绩不垮掉就可以了。因为参与分很低，所以保证作业和考试OK就行。</p>
+<p>AI Tools Policy:</p>
+<ul>
+<li>Prohibited：<strong>禁止使用AI工具</strong>，若使用则按作弊处理。并且也不让用AI工具分析过程、探究思路等。</li>
+</ul>
+<p>Participation: (5%)</p>
+<ul>
+<li>Includes participation in section</li>
+</ul>
+<p>Quizzes: (30%, Bring Pencil and Paper)</p>
+<ul>
+<li>Sep.16</li>
+<li>Oct.7</li>
+<li>Oct.21</li>
+<li>Nov.5 (In Section)</li>
+<li>Nov.25</li>
+<li>Dec.3 (这个似乎也是在Section中)</li>
+</ul>
+<p>Homework Due: (35%)</p>
+<ul>
+<li>Sep.11</li>
+<li>Sep.25</li>
+<li>Oct.9</li>
+<li>Oct.23</li>
+<li>Nov.6</li>
+<li>Nov.20</li>
+<li>Dec.4</li>
+</ul>
+<p>Final Exam: (30%)</p>
+<ul>
+<li>Dec 15, 3:30 - 5:30pm</li>
+</ul>
+<h2 id="_2">主题介绍</h2>
+<p>计算理论的重点有三个：</p>
+<ul>
+<li>Automata 自动机</li>
+<li>Computability 可计算性</li>
+<li>Complexity 复杂性</li>
+</ul>
+<p>本书的内容将带领我们了解这么一个根本性的问题：计算机的基本能力和局限性是什么？What are the fundamental capabilities and limitations of computers?</p>
+<p>自动机理论：阐述了计算的数学模型的定义和性质。一个模型是有穷自动机 Finite Automaton，用于文本处理、编译程序以及硬件设计；另一个模型是上下文无关文法模型 Context-Free Grammar，用在人工智能和程序设计语言中。</p>
+<p>可计算性理论：将一个问题拆分成可以用计算机解决的，和不可以用计算机解决的。</p>
+<p>计算复杂性理论的核心问题：是什么使得某些问题很难计算，而另一些问题又很容易计算？Complexity最重要的应用是密码学Cryptography，它的核心目的是寻找难计算的问题。</p>
+<h2 id="_3">数学工具</h2>
+<p>计算理论中最常用的数学工具包括：</p>
+<ul>
+<li>Set 集合</li>
+<li>Union, Intersection, Complement（并、交、补）</li>
+<li>Sequence 序列</li>
+<li>Tuple 元组</li>
+<li>Cartesian Product 笛卡尔积（Cross Product 叉积）</li>
+<li>Function 函数</li>
+<li>Mapping 映射</li>
+<li>Graph 图</li>
+<li>Undirected Graph, Directed Graph （无向图、有向图）</li>
+<li>String, Lexicographic Order（字符串，字典序）</li>
+</ul>
+<p>Boolean Logic 布尔逻辑：</p>
+<ul>
+<li>AND ∧</li>
+<li>OR ∨</li>
+<li>NOT ¬</li>
+<li>Exclusive OR ⊕ （只有1⊕0为0）</li>
+<li>Equality ↔</li>
+<li>Implication → （只有1→0为0）</li>
+</ul>
+<p>定义、定理和证明：</p>
+<ul>
+<li>Defination 定义</li>
+<li>Mathematical Statement 数学命题</li>
+<li>Proof 证明</li>
+<li>Theorem 定理</li>
+<li>Lemma 引理</li>
+<li>Corollary 推论</li>
+<li>Counterexample 反例</li>
+</ul>
+<p>命题记号：</p>
+<ul>
+<li>⟺ iff, if and only if</li>
+<li>for <strong>P</strong>⟺<strong>Q:</strong></li>
+<li>forward direction: <strong>P</strong>⟹<strong>Q</strong></li>
+<li>reverse direction: <strong>Q</strong>⟹<strong>P</strong></li>
+</ul>
+<p>证明的类型</p>
+<ul>
+<li>Proof by Construction 构造性证明</li>
+<li>Proof by Contradiction 反证法</li>
+<li>Proof by Induction 归纳法</li>
+<li>Basis 归纳基础</li>
+<li>Induction Step 归纳步骤</li>
+</ul>
+<hr />
+<h2 id="_4">课程规范证明示例</h2>
+<p><img alt="1757538986062" src="../image/ch0_intro/1757538986062.png" /></p>
+<h3 id="option-1-induction">Option 1 (Induction)</h3>
+<p>This DFA recognizes the language by proof of induction on the length of the input string such that the DFA always ends in the correct state according to the last symbol and the requirement that the string starts with 0.</p>
+<p><strong>Base Case:</strong></p>
+<ol>
+<li>If <em>w</em> is a single 0, the DFA moves from <em>q₀</em> to <em>q₁</em>. The DFA does not accept this string because it doesn’t begin with a 0 <strong>AND</strong> end with a 1.</li>
+<li>If <em>w</em> is a single 1, the DFA moves from <em>q₀</em> to <em>q₃</em>. The DFA does not accept this string and will never accept because it doesn’t begin with a 0.</li>
+<li>If <em>w</em> is the empty string, the DFA will immediately reject because it doesn’t begin with a 0 or end with a 1.</li>
+</ol>
+<p><strong>Inductive Steps:</strong></p>
+<p>Suppose the DFA is in the correct state after reading a string of length <em>k</em> and let <em>w</em> be a string that begins with a 0 and ends with a 1 of length <em>k + 1</em>.</p>
+<ul>
+<li>If <em>w</em> began with a 1, the DFA transitioned to <em>q₁</em> and will never accept due to an infinite loop.</li>
+<li>Otherwise, if <em>w</em> began with a 0, the DFA can either be in <em>q₁</em> or <em>q₂</em> after reading in <em>k</em> characters.</li>
+</ul>
+<p>Now there are two cases:</p>
+<ol>
+<li>The last character of <em>w</em> is a 0</li>
+<li>The last character of <em>w</em> is a 1</li>
+</ol>
+<p>In the first case, if the last character of <em>w</em> is a 0, regardless of whether the DFA is in <em>q₁</em> or <em>q₂</em>, the DFA will end in <em>q₁</em> and reject.</p>
+<p>In the second case, if the last character of <em>w</em> is a 1, regardless of whether the DFA is in <em>q₁</em> or <em>q₂</em>, the DFA will end in <em>q₂</em> and accept.</p>
+<p>We know that the DFA only accepts a string <strong>iff</strong> (if and only if) it ends in <em>q₂</em> and by the invariant, <em>q₂</em> means the string starts with 0 and ends with 1.</p>
+<p>Conversely, if the string does not begin with 0, the DFA will go into an infinite loop in <em>q₃</em> and reject.</p>
+<p>And if the string does not end with 1, the DFA will end in <em>q₁</em> and reject.</p>
+<hr />
+<h3 id="option-2-construction">Option 2 (Construction)</h3>
+<p>This DFA recognizes the language by proof of construction by breaking up how the DFA handles strings in different cases.</p>
+<p>For any string <em>w</em>, <em>w</em> will either be one of the following:</p>
+<ol>
+<li><em>w</em> begins with a 0 and ends with a 1</li>
+<li><em>w</em> begins with a 0 and doesn’t end with a 1</li>
+<li><em>w</em> doesn’t begin with a 0 and ends with a 1</li>
+<li><em>w</em> doesn’t begin with a 0 and doesn’t end with a 1</li>
+</ol>
+<p>In case 1, the DFA must transition to <em>q₁</em> since <em>w</em> begins with a 0 and it must end up in <em>q₂</em> because regardless of whether the DFA is in <em>q₁</em> or <em>q₂</em> before the last character is read, it will always end in <em>q₂</em>. Therefore, strings in this case will always get accepted.</p>
+<p>In case 2, the DFA must transition to <em>q₁</em> since <em>w</em> begins with a 0 and it must end up in <em>q₁</em> because regardless of whether the DFA is in <em>q₁</em> or <em>q₃</em> before the last character is read, it will always end in <em>q₁</em>. Therefore, strings in this case will always be rejected.</p>
+<p>In case 3 and 4 (which can be combined), the DFA must transition to <em>q₃</em> since <em>w</em> begins with a 1 and will remain in <em>q₃</em> as the state loops on all inputs. Therefore, strings in this case will always be rejected.</p>
+<p>From the above cases, the only strings that can be accepted by this DFA are those that begin with a 0 and end with a 1 (case 1). All other cases result in the string being rejected. Therefore, the DFA recognizes the above language.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

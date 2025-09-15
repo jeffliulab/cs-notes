@@ -285,10 +285,6 @@ $$
 
 注意sigma（alphabet）只是保证A和B是合法的，正则运算中不需要用到alphabet中的内容。
 
-
-
-
-
 ## 1.2 Nondeterminism 非确定性
 
 ### 1.2.1 DFA, NFA
@@ -307,7 +303,7 @@ $$
 
 > 定理1.19：每一台NFA都等价于某一台DFA。
 
-> Corollary 1.40: A language is regular if and only if some nondeterministic finite automaton recognizes it. 
+> Corollary 1.40: A language is regular if and only if some nondeterministic finite automaton recognizes it.
 >
 > 推论1.20：一个语言是正则的，当且仅当有一台非确定性有穷自动机识别他。
 
@@ -511,3 +507,5 @@ $$
 5. 新字符串 `xyyz` 的 `0` 和 `1` 数量不再相等，所以它**不属于**语言 `L`。
 6. 这与泵引理的承诺（泵完之后还必须在语言里）产生 **矛盾** 。
 7. **因此，语言 L 不是正则的，所以不存在任何DFA可以识别它。**
+
+## 附：练习
