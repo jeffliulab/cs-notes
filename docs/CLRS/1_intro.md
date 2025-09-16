@@ -95,9 +95,13 @@ def insertion_sort(arr):
     return arr
 ```
 
-- Justification
+.
 
-Loop invariant:
+---
+
+**Justification**
+
+**Loop invariant:**
 
 At the beginning of each iteration i, the subarray A\[1...i-1\] is sorted.
 
@@ -105,7 +109,45 @@ At the beginning of each iteration i, the subarray A\[1...i-1\] is sorted.
 2. Maintenance: If A\[1...i-1\] is sorted before iteration i, then inserting A\[i\] into its correct position keeps A\[1...i\] sorted.
 3. Termination: When i=n+1, the invariant tells us that A\[1...n\] is sorted, so the algorithm is correct.
 
-- Time Analysis
+注意这里的Loop Invariant（循环不变量）：
+
+插入排序的 **核心承诺** ，也就是它的**循环不变量 (Loop Invariant)** 是：
+
+> **“在 `for` 循环的每次迭代 `i` 开始时，子数组 `A[1...i-1]` 都包含该范围内的原始元素，并且是排好序的。”**
+
+下面我们用三个步骤来验证这个承诺的有效性。
+
+**1、初始化（证明起点）**
+
+这一步检查的是，在循环 **第一次执行之前** ，我们的承诺是否成立。
+
+* `for` 循环是从 `i = 2` 开始的。
+* 在这个起点，不变量所指的子数组是 `A[1...i-1]`，代入 `i=2` 就是 `A[1...2-1]`，即 `A[1]`。
+* 一个只包含**单个元素**的子数组，根据定义，它本身就是有序的。
+* 因此，我们的承诺在最开始的时候是成立的。✅
+
+**2、保持（证明过程）**
+
+这一步要证明的是：如果在某一次迭代开始时承诺是成立的，那么在这次迭代结束、下一次迭代开始时，承诺 **依然会成立** 。这证明了我们的承诺在循环中是能够一直维持下去的。
+
+* **假设** ：在第 `i` 次迭代开始时，承诺为真，也就是说子数组 `A[1...i-1]` 已经排好序了。
+* **操作** ：在这次迭代中，循环体（内部的 `while` 循环）会取出下一个元素 `A[i]`，并将它插入到前面已经有序的 `A[1...i-1]` 中的正确位置。
+* **结果** ：当 `A[i]` 插入后，这个新的、更长的子数组 `A[1...i]` 现在整体就是有序的了。这个状态是第 `i` 次迭代结束时的状态。
+* 当循环进入下一次迭代，也就是第 `i+1` 次时，它所面对的 `A[1...(i+1)-1]` 正是我们刚刚排好序的 `A[1...i]`。
+* 因此，承诺成功地维持并传递到了下一次迭代。✅
+
+**3、终止（证明终点）**
+
+这一步展示的是，当循环 **结束时** ，这个一直保持为真的承诺能告诉我们什么。
+
+* `for` 循环的终止条件是当 `i` 增加到 **n + 1** 时，循环不再执行。
+* 在循环终止的这一刻，我们可以最后一次运用我们的不变量，将 `i = n + 1` 代入不变量的陈述中。
+* 这个陈述就变成了：“子数组 `A[1...(n+1)-1]`，即 `A[1...n]`，是排好序的。”
+* 这个最终的陈述意味着**整个数组**都已有序。这正是我们算法想要达成的目标，所以证明完成。我们通过循环不变量，严谨地说明了插入排序算法是正确的。✅
+
+---
+
+**Time Analysis**
 
 Best Case: Array already sorted → n-1 comparisons → Θ(n).
 
@@ -113,7 +155,9 @@ Worst Case: Array in reverse order → 1+2+...+(n-1) = n(n-1)/2 comparisons → 
 
 Average Case: Random input → about n\^2/4 comparisons → Θ(n\^2).
 
-- Space Analysis
+---
+
+**Space Analysis**
 
 Insertion Sort is an in-place sorting algorithm. It only requires a constant amount of additional memory for indices and temporary variables.
 
@@ -149,6 +193,8 @@ CLRS 2.3
   $$
 
 一般来说，Big O描述了一个函数增长速度的**上限（Upper Bound）**。可以这样理解：“当输入规模 `n` 足够大时，函数 `f(n)` 的增长速度**不会超过**函数 `g(n)` 的 `c` 倍。
+
+通常n0选取为1，或者大于1的一个整数。（**虽然在上述定义中没有说明n0必须大于等于1，但是一般在算法分析中我们默认n0是大于等于1的。因为我们在分析复杂性的时候，关心的是渐进性为，目的是描述函数的长期增长趋势，因此如果n0起始于负数，在这个应用中是没有意义的。**）
 
 也就是说，在算法分析中，g(n)是f(n)的太牛花瓣，并且我们不关注常数因子。所以当我们去分析一个算法的Big O的时候，我们只需要找到合适的c和n，找到g(n)就可以了。
 
