@@ -4,6 +4,6 @@ Hello！欢迎来到我的计算机科学笔记。之前人工智能笔记整理
 
 2025 Fall我正好要上三门MSCS的必修课，所以就同步把笔记做一下：
 
-* Algorithms, 采用经典的算法导论教材CLRS（第四版）
-* Networks
-* Computational Theory, 采用经典的计算理论导引（第三版）
+* Algorithms，采用经典的算法导论教材CLRS（第四版）
+* Networks，采用经典的自顶向下方法（第八版）
+* Computational Theory，采用经典的计算理论导引（第三版）
