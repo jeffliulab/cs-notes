@@ -1,0 +1,1420 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="刘杰夫">
+      
+      
+        <link rel="canonical" href="https://jeffliulab.github.io/cs-notes/algorithms/1_intro/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../2_recurrence/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Ch1.序言与概论 - 刘杰夫的计算机科学笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="刘杰夫的计算机科学笔记" class="md-header__button md-logo" aria-label="刘杰夫的计算机科学笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            刘杰夫的计算机科学笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ch1.序言与概论
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="刘杰夫的计算机科学笔记" class="md-nav__button md-logo" aria-label="刘杰夫的计算机科学笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    刘杰夫的计算机科学笔记
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    算法导论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            算法导论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法分析框架
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      复杂性分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="复杂性分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#big-o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Big O
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Big O">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#big-o_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      证明Big O性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-omega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Big Omega
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-theta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Big Theta
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学基础
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学基础">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      指数增长快于多项式函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      指数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantifiers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summation-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summation Formulas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summation Formulas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arithmetic series
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometric-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometric series
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      离散数学和集合
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ceilings-and-floors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ceilings and Floors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_recurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch2.算法递归式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_ranndomized_algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch3.随机化算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch4.排序算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_order_statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch5.顺序统计量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算理论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            计算理论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computational_theory/ch0_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computational_theory/ch1_regular_languages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch2.正则语言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法分析框架
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法设计
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      复杂性分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="复杂性分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#big-o" class="md-nav__link">
+    <span class="md-ellipsis">
+      Big O
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Big O">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#big-o_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      证明Big O性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-omega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Big Omega
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#big-theta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Big Theta
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学基础
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学基础">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      指数增长快于多项式函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      指数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantifiers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summation-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summation Formulas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summation Formulas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arithmetic-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arithmetic series
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometric-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometric series
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      离散数学和集合
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ceilings-and-floors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ceilings and Floors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">算法导论：序言与概论</h1>
+<hr />
+<h2 id="_2">算法简介</h2>
+<p>CLRS 1.1， 1.2</p>
+<h2 id="_3">算法分析框架</h2>
+<p>一个完整的算法分析一般包含如下内容：</p>
+<ul>
+<li>Example</li>
+<li><strong>Description</strong></li>
+<li>Pseudocode</li>
+<li>Actual Code</li>
+<li><strong>Justification</strong></li>
+<li><strong>Time Analysis</strong></li>
+<li><strong>Space Analysis</strong></li>
+</ul>
+<p>以插入排序为例：</p>
+<ul>
+<li>Example</li>
+</ul>
+<p>Input: [5, 3, 4, 1, 2]Process:Step 1: [3, 5, 4, 1, 2]Step 2: [3, 4, 5, 1, 2]Step 3: [1, 3, 4, 5, 2]Step 4: [1, 2, 3, 4, 5]Output: [1, 2, 3, 4, 5]</p>
+<ul>
+<li>Description</li>
+</ul>
+<p>Given an array of n numbers, insertion sort works by considering each
+element (starting from the second) and inserting it into its correct
+position among the already sorted part of the array. It keeps moving the
+element left until it is not smaller than the element before it. The
+process repeats until the entire array is sorted.</p>
+<ul>
+<li>Pseudocode</li>
+</ul>
+<pre><code>INSERTION-SORT(A[1...n])
+        for i = 2 to n
+            j = i
+            while j &gt; 1 and A[j] &lt; A[j-1]
+                swap A[j] and A[j-1]
+                j = j - 1
+</code></pre>
+<ul>
+<li>Actual Code</li>
+</ul>
+<pre><code class="language-python">def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        j = i
+        while j &gt; 0 and arr[j] &lt; arr[j-1]:
+            arr[j], arr[j-1] = arr[j-1], arr[j]
+            j -= 1
+    return arr
+</code></pre>
+<p>.</p>
+<hr />
+<p><strong>Justification</strong></p>
+<p><strong>Loop invariant:</strong></p>
+<p>At the beginning of each iteration i, the subarray A[1...i-1] is sorted.</p>
+<ol>
+<li>Initialization: When i=2, the subarray A[1] is trivially sorted.</li>
+<li>Maintenance: If A[1...i-1] is sorted before iteration i, then inserting A[i] into its correct position keeps A[1...i] sorted.</li>
+<li>Termination: When i=n+1, the invariant tells us that A[1...n] is sorted, so the algorithm is correct.</li>
+</ol>
+<p>注意这里的Loop Invariant（循环不变量）：</p>
+<p>插入排序的 <strong>核心承诺</strong> ，也就是它的<strong>循环不变量 (Loop Invariant)</strong> 是：</p>
+<blockquote>
+<p><strong>“在 <code>for</code> 循环的每次迭代 <code>i</code> 开始时，子数组 <code>A[1...i-1]</code> 都包含该范围内的原始元素，并且是排好序的。”</strong></p>
+</blockquote>
+<p>下面我们用三个步骤来验证这个承诺的有效性。</p>
+<p><strong>1、初始化（证明起点）</strong></p>
+<p>这一步检查的是，在循环 <strong>第一次执行之前</strong> ，我们的承诺是否成立。</p>
+<ul>
+<li><code>for</code> 循环是从 <code>i = 2</code> 开始的。</li>
+<li>在这个起点，不变量所指的子数组是 <code>A[1...i-1]</code>，代入 <code>i=2</code> 就是 <code>A[1...2-1]</code>，即 <code>A[1]</code>。</li>
+<li>一个只包含<strong>单个元素</strong>的子数组，根据定义，它本身就是有序的。</li>
+<li>因此，我们的承诺在最开始的时候是成立的。✅</li>
+</ul>
+<p><strong>2、保持（证明过程）</strong></p>
+<p>这一步要证明的是：如果在某一次迭代开始时承诺是成立的，那么在这次迭代结束、下一次迭代开始时，承诺 <strong>依然会成立</strong> 。这证明了我们的承诺在循环中是能够一直维持下去的。</p>
+<ul>
+<li><strong>假设</strong> ：在第 <code>i</code> 次迭代开始时，承诺为真，也就是说子数组 <code>A[1...i-1]</code> 已经排好序了。</li>
+<li><strong>操作</strong> ：在这次迭代中，循环体（内部的 <code>while</code> 循环）会取出下一个元素 <code>A[i]</code>，并将它插入到前面已经有序的 <code>A[1...i-1]</code> 中的正确位置。</li>
+<li><strong>结果</strong> ：当 <code>A[i]</code> 插入后，这个新的、更长的子数组 <code>A[1...i]</code> 现在整体就是有序的了。这个状态是第 <code>i</code> 次迭代结束时的状态。</li>
+<li>当循环进入下一次迭代，也就是第 <code>i+1</code> 次时，它所面对的 <code>A[1...(i+1)-1]</code> 正是我们刚刚排好序的 <code>A[1...i]</code>。</li>
+<li>因此，承诺成功地维持并传递到了下一次迭代。✅</li>
+</ul>
+<p><strong>3、终止（证明终点）</strong></p>
+<p>这一步展示的是，当循环 <strong>结束时</strong> ，这个一直保持为真的承诺能告诉我们什么。</p>
+<ul>
+<li><code>for</code> 循环的终止条件是当 <code>i</code> 增加到 <strong>n + 1</strong> 时，循环不再执行。</li>
+<li>在循环终止的这一刻，我们可以最后一次运用我们的不变量，将 <code>i = n + 1</code> 代入不变量的陈述中。</li>
+<li>这个陈述就变成了：“子数组 <code>A[1...(n+1)-1]</code>，即 <code>A[1...n]</code>，是排好序的。”</li>
+<li>这个最终的陈述意味着<strong>整个数组</strong>都已有序。这正是我们算法想要达成的目标，所以证明完成。我们通过循环不变量，严谨地说明了插入排序算法是正确的。✅</li>
+</ul>
+<hr />
+<p><strong>Time Analysis</strong></p>
+<p>Best Case: Array already sorted → n-1 comparisons → Θ(n).</p>
+<p>Worst Case: Array in reverse order → 1+2+...+(n-1) = n(n-1)/2 comparisons → Θ(n\^2).</p>
+<p>Average Case: Random input → about n\^2/4 comparisons → Θ(n\^2).</p>
+<hr />
+<p><strong>Space Analysis</strong></p>
+<p>Insertion Sort is an in-place sorting algorithm. It only requires a constant amount of additional memory for indices and temporary variables.</p>
+<p>Space complexity: O(1).</p>
+<p>Stability: Stable (equal elements retain their relative order)</p>
+<h2 id="_4">算法设计</h2>
+<p>CLRS 2.3</p>
+<h2 id="_5">复杂性分析</h2>
+<p>（待办：过一遍CLRS 3.1，3.2，3.3，补充一下遗漏掉的内容）</p>
+<p>在算法分析中，我们采用Asymptotic Notation，也即渐进记法，来分析算法的效率。其包含三个核心概念：</p>
+<ul>
+<li>Big O</li>
+<li>Big Omega <span class="arithmatex">\(\Omega\)</span></li>
+<li>Big Theta <span class="arithmatex">\(\Theta\)</span></li>
+</ul>
+<h3 id="big-o">Big O</h3>
+<ul>
+<li><strong>Definition:</strong> The function <span class="arithmatex">\(f(n)\)</span> is <span class="arithmatex">\(O(g(n))\)</span> if there exist constants <span class="arithmatex">\(c &gt; 0\)</span> and <span class="arithmatex">\(n_0\)</span> such that</li>
+</ul>
+<p>$$
+  0 \leq f(n) \leq c \cdot g(n) \quad \text{for all } n \geq n_0.
+  $$
+- <strong>Example:</strong> <span class="arithmatex">\(2n^2 + 3n + 1\)</span> is <span class="arithmatex">\(O(n^2)\)</span> because for <span class="arithmatex">\(c = 3\)</span> and <span class="arithmatex">\(n_0 = 1\)</span>, we have</p>
+<p>$$
+  0 \leq 2n^2 + 3n + 1 \leq 2n^2 + 3n^2 + 1 \cdot n^2 \leq 6n^2 , \quad \text{for all } n \geq 1
+  $$</p>
+<p>一般来说，Big O描述了一个函数增长速度的<strong>上限（Upper Bound）</strong>。可以这样理解：“当输入规模 <code>n</code> 足够大时，函数 <code>f(n)</code> 的增长速度<strong>不会超过</strong>函数 <code>g(n)</code> 的 <code>c</code> 倍。</p>
+<p>通常n0选取为1，或者大于1的一个整数。（<strong>虽然在上述定义中没有说明n0必须大于等于1，但是一般在算法分析中我们默认n0是大于等于1的。因为我们在分析复杂性的时候，关心的是渐进性为，目的是描述函数的长期增长趋势，因此如果n0起始于负数，在这个应用中是没有意义的。</strong>）</p>
+<p>也就是说，在算法分析中，g(n)是f(n)的太牛花瓣，并且我们不关注常数因子。所以当我们去分析一个算法的Big O的时候，我们只需要找到合适的c和n，找到g(n)就可以了。</p>
+<p>从数学定义上来说，上面的例子就算给出 <code>O(n³)</code> ，仍然也是一个正确的上限，但它是一个很“松”的上限，没有精确地反映出函数 <code>2n</code> 的增长趋势。这就像问一个小孩多高，你说：“他肯定不超过3米高。” 这句话虽然没错，但没什么用。我们更想听到的是：“他大概1米2高。”所以，当我们分析算法复杂度时，虽然有无数个正确的 Big O 答案，但我们总是约定俗成地去寻找并给出一个<strong>最简单、最贴近</strong>的那个，也就是 <strong>最小的那个增长率</strong> 。如果能找到严格上界，有时候也会写作o记号（小o）。</p>
+<p>在记录Big O的时候，一般有两种常见写法：</p>
+<ul>
+<li><strong><code>f(n) = O(n²)</code></strong> ：这是最常见、最通用的写法。它读作 “f(n) is O of n-squared”（f(n) 是 n 平方的 Big O）。虽然这里用的是等号 <code>=</code>，但它并不表示数学上严格的“相等”，而是一种约定俗成的表示法，意思是“f(n) 的增长率属于 O(n²) 这个级别”。</li>
+<li><strong><code>f(n) ∈ O(n²)</code></strong> ：这是从数学集合角度来看<strong>更严谨</strong>的写法。这里的 <code>∈</code> 符号表示“属于”（is an element of）。<code>O(n²)</code> 实际上代表一个 <strong>函数的集合</strong> ，这个集合包含了所有增长速度不超过 <code>n²</code> 的函数。所以 <code>f(n) ∈ O(n²)</code> 的意思是 “f(n) 是 O(n²) 这个集合中的一员”。</li>
+</ul>
+<h4 id="big-o_1">证明Big O性质</h4>
+<p><strong>如果 <code>f(n) = O(g(n))</code> 并且 <code>h(n) = O(g(n))</code>，那么 <code>f(n) + h(n) = O(g(n))</code>。</strong></p>
+<p><strong>用通俗的语言解释就是：</strong> 如果两个函数 <code>f(n)</code> 和 <code>h(n)</code> 的增长率都最多和 <code>g(n)</code> 一样快（或者更慢），那么这两个函数的和 <code>f(n) + h(n)</code> 的增长率也最多和 <code>g(n)</code> 一样快。</p>
+<p>这在算法分析中非常有用。比如，如果你有两个连续的代码块，它们的运行时间分别是 <code>O(n)</code> 和 <code>O(n)</code>，那么整个过程的运行时间就是 <code>O(n) + O(n)</code>，根据这个定理，结果依然是 <code>O(n)</code>。</p>
+<p><strong>PROOFS</strong></p>
+<p>证明过程是严格按照大O表示法的定义来进行的。我们一步一步来看：</p>
+<p><strong>1. 假设 (Suppose)</strong></p>
+<blockquote>
+<p><code>Suppose f = O(g) and h = O(g).</code></p>
+</blockquote>
+<p>证明的第一步是假设论点的前提条件成立。这里我们假设 <code>f</code> 的增长率是 <code>O(g)</code>，<code>h</code> 的增长率也是 <code>O(g)</code>。
+（图片右上角提示，<code>f</code> 是 <code>f(n)</code> 的简写，这在数学证明中很常见。）</p>
+<p><strong>2. 展开 <code>f = O(g)</code> 的定义</strong></p>
+<blockquote>
+<p><code>f = O(g) means f ≤ c*g for n ≥ n₀.</code></p>
+</blockquote>
+<p>这是大O表示法的正式定义。<code>f(n) = O(g(n))</code> 的意思是：
+存在一个正常数 <code>c</code> 和一个整数 <code>n₀</code>，使得当 <code>n</code> 大于等于 <code>n₀</code> 时，<code>f(n)</code> 的值总是不超过 <code>c</code> 乘以 <code>g(n)</code> 的值。</p>
+<ul>
+<li><code>c</code> 是一个常量系数，它允许我们忽略常数倍的差异。</li>
+<li><code>n₀</code> 是一个阈值，它表示我们只关心当输入规模 <code>n</code> 足够大时的情况。</li>
+</ul>
+<p><strong>3. 展开 <code>h = O(g)</code> 的定义</strong></p>
+<blockquote>
+<p><code>h = O(g) means h ≤ d*g for n ≥ n₁.</code></p>
+</blockquote>
+<p>同理，<code>h(n) = O(g(n))</code> 的意思是：
+存在另一个正常数 <code>d</code> 和另一个整数 <code>n₁</code>，使得当 <code>n</code> 大于等于 <code>n₁</code> 时，<code>h(n)</code> 的值总是不超过 <code>d</code> 乘以 <code>g(n)</code> 的值。
+<strong>注意：</strong> 这里的常数 <code>d</code> 和阈值 <code>n₁</code> 可能与上面 <code>f(n)</code> 的 <code>c</code> 和 <code>n₀</code> 不同。</p>
+<p><strong>4. 相加 (Adding gives)</strong></p>
+<blockquote>
+<p><code>Adding gives f + h ≤ (c+d)g for n ≥ ?</code></p>
+</blockquote>
+<p>现在，为了证明 <code>f(n) + h(n)</code> 的情况，我们将上面两个不等式相加：
+<code>f(n) ≤ c*g(n)</code>
+<code>h(n) ≤ d*g(n)</code>
+两式相加得到：
+<code>f(n) + h(n) ≤ c*g(n) + d*g(n)</code>
+提取公因式 <code>g(n)</code>，得到：
+<code>f(n) + h(n) ≤ (c+d)g(n)</code></p>
+<p><strong>5. 确定新的阈值 <code>n</code>（图片中未写完的部分）</strong>
+关键问题来了：这个新的不等式 <code>f+h ≤ (c+d)g</code> 在什么条件下成立呢？</p>
+<ul>
+<li>第一个不等式 <code>f ≤ c*g</code> 要求 <code>n ≥ n₀</code>。</li>
+<li>第二个不等式 <code>h ≤ d*g</code> 要求 <code>n ≥ n₁</code>。
+  为了让<strong>两个</strong>不等式同时成立，<code>n</code> 必须同时满足 <code>n ≥ n₀</code> 和 <code>n ≥ n₁</code>。因此，我们只需要取两者中较大的那个值作为新的阈值即可。
+  所以，我们定义一个新的阈值 <code>n₂ = max(n₀, n₁)</code>。当 <code>n ≥ n₂</code> 时，上面两个不等式都成立，因此它们的和也成立。</li>
+</ul>
+<p>所以，图片中那个空白的地方应该填 <code>max(n₀, n₁)</code>。</p>
+<p><strong>结论</strong></p>
+<p>我们已经证明了：
+存在一个新的常数 <code>C = c+d</code> 和一个新的阈值 <code>n₂ = max(n₀, n₁)</code>，使得当 <code>n ≥ n₂</code> 时，<code>f(n) + h(n) ≤ C * g(n)</code>。</p>
+<p>这完全符合大O表示法的定义！因此，我们得出结论：<code>f(n) + h(n) = O(g(n))</code>。证明完毕。</p>
+<p><strong>简单例子</strong></p>
+<p>假设 <code>f(n) = 2n + 10</code>，<code>h(n) = 3n + 5</code>，我们要证明 <code>f(n) + h(n)</code> 是 <code>O(n)</code>。</p>
+<ol>
+<li><strong>证明 <code>f(n) = O(n)</code></strong> :
+   我们需要找到 <code>c</code> 和 <code>n₀</code> 使得 <code>2n + 10 ≤ c*n</code>。
+   如果我们选 <code>c = 3</code>，那么 <code>2n + 10 ≤ 3n</code> -&gt; <code>10 ≤ n</code>。所以，当 <code>c₁=3, n₀=10</code> 时，<code>f(n) = O(n)</code> 成立。</li>
+<li><strong>证明 <code>h(n) = O(n)</code></strong> :
+   我们需要找到 <code>d</code> 和 <code>n₁</code> 使得 <code>3n + 5 ≤ d*n</code>。
+   如果我们选 <code>d = 4</code>，那么 <code>3n + 5 ≤ 4n</code> -&gt; <code>5 ≤ n</code>。所以，当 <code>c₂=4, n₁=5</code> 时，<code>h(n) = O(n)</code> 成立。</li>
+<li>
+<p><strong>证明 <code>f(n) + h(n) = O(n)</code></strong> :
+   <code>f(n) + h(n) = (2n+10) + (3n+5) = 5n + 15</code>。
+   根据上面的证明，我们应该有 <code>f(n) + h(n) ≤ (c₁+c₂)n</code> 对于 <code>n ≥ max(n₀, n₁)</code> 成立。</p>
+</li>
+<li>
+<p>新常数 <code>C = c₁ + c₂ = 3 + 4 = 7</code>。</p>
+</li>
+<li>新阈值 <code>n₂ = max(n₀, n₁) = max(10, 5) = 10</code>。</li>
+<li>我们来验证一下：<code>5n + 15 ≤ 7n</code> 是否在 <code>n ≥ 10</code> 时成立？
+  <code>15 ≤ 2n</code> -&gt; <code>7.5 ≤ n</code>。
+  因为 <code>n ≥ 10</code> 已经满足了 <code>n ≥ 7.5</code> 的条件，所以这个不等式是成立的。</li>
+</ol>
+<p>因此，我们成功证明了 <code>f(n) + h(n) = O(n)</code>。</p>
+<h3 id="big-omega">Big Omega</h3>
+<ul>
+<li><strong>Definition:</strong> The function <span class="arithmatex">\(f(n)\)</span> is <span class="arithmatex">\(\Omega(g(n))\)</span> if there exist constants <span class="arithmatex">\(c &gt; 0\)</span> and <span class="arithmatex">\(n_0\)</span> such that</li>
+</ul>
+<p>$$
+  0 \leq c \cdot g(n) \leq f(n) \quad \text{for all } n \geq n_0.
+  $$
+- <strong>Example:</strong> <span class="arithmatex">\(2n^2 + 3n + 1\)</span> is <span class="arithmatex">\(\Omega(n^2)\)</span> because for <span class="arithmatex">\(c = 2\)</span> and <span class="arithmatex">\(n_0 = 1\)</span>, we have</p>
+<p>$$
+  0 \leq 2n^2 \leq 2n^2 + 3n + 1, \quad \text{for all } n \geq 1
+  $$</p>
+<p>一般来说，Big Omega描述了一个函数增长速度的<strong>下限（Lower Bound）</strong>。可以这样理解：“当输入规模 <code>n</code> 足够大时，函数 <code>f(n)</code> 的增长速度<strong>至少</strong>和函数 <code>g(n)</code> 的 <code>d</code> 倍一样快。” 也就是说，<code>g(n)</code> 是 <code>f(n)</code> 的一种“地板”，<code>f(n)</code> 的增长再慢也慢不过 <code>g(n)</code>。在算法分析中，它常用来描述一个算法的 <strong>最好情况下的时间复杂度</strong> 。</p>
+<p>对于所有增长的函数 <code>f(n)</code>（比如算法的运行时间），我们几乎总可以说 <code>f(n) = Ω(1)</code>（因为运行时间至少是一个常数，不会是负数）。<strong>但是，这同样是一个没有信息量的“松”的下限。</strong></p>
+<p>我们使用 Big Omega 是想知道：“这个算法的运行时间<strong>最少</strong>也要增长得多快？” 说 <code>Ω(1)</code> 等于在说：“这个算法总得花点时间才能运行完。” 这是一句废话。说一个排序算法是 <code>Ω(n)</code> 意味着：“不管输入的数据有多好（比如已经排好序了），你至少也得把每个元素看一遍，所以时间下限是线性增长的。” 这个信息就非常有用了。</p>
+<p>所以在实际分析中，和 Big O 一样，我们一半呢寻找的是<strong>最紧的下限（Tightest Lower Bound）</strong>，也就是增长最快的那个下界函数，来提供有意义的分析。如果能找到严格下界，记录时也用小omega，也即<span class="arithmatex">\(\omega\)</span>来表示。</p>
+<h3 id="big-theta">Big Theta</h3>
+<ul>
+<li><strong>Definition:</strong>  The function <span class="arithmatex">\(f(n)\)</span> is <span class="arithmatex">\(\Theta(g(n))\)</span> if it is both <span class="arithmatex">\(O(g(n))\)</span> and <span class="arithmatex">\(\Omega(g(n))\)</span>.</li>
+<li><strong>Example:</strong> <span class="arithmatex">\(2n^2 + 3n + 1\)</span> is <span class="arithmatex">\(\Theta(n^2)\)</span> because it is both <span class="arithmatex">\(O(n^2)\)</span> and <span class="arithmatex">\(\Omega(n^2)\)</span>.</li>
+</ul>
+<p><code>f(n) = Θ(g(n))</code> 的意思是：存在正常数 <code>c</code>, <code>d</code> 和 <code>n₀</code>，使得对于所有 <code>n ≥ n₀</code>，都有 <code>d * g(n) ≤ f(n) ≤ c * g(n)</code>。Big Theta 描述了一个函数增长速度的 <strong>紧密界限 (Tight Bound)</strong> 。它其实是 Big O 和 Big Omega 的结合。<code>f(n) = Θ(g(n))</code> 意味着 <code>f(n)</code> 的增长速度既不比 <code>g(n)</code> 快，也不比 <code>g(n)</code> 慢，它们的增长速率是<strong>相同</strong>的。也就是说，<code>f(n)</code> 被 <code>g(n)</code> 从上下两个方向“夹住”了。这是对一个算法复杂度最精确的描述。</p>
+<p>一般来说，如果我们在找Big O和Big Omega的时候，找到的如果已经是最紧的上限和最紧的下限，那么这个时候用这两个最紧的上下限就能轻松找到那个被夹住的紧密界限。</p>
+<h2 id="_6">数学基础</h2>
+<p>本节整理了一些本书中经常涉及到的一些数学相关的知识，基本都是比较基础的数学内容。</p>
+<h3 id="_7">指数增长快于多项式函数</h3>
+<p>在算法分析中有一个至关重要的规律：<strong>任何指数函数的增长速度都比任何多项式函数快。</strong></p>
+<ul>
+<li><strong>多项式函数 (Polynomials)</strong> ：形如<span class="arithmatex">\(n^b\)</span>的函数，其中 <code>b</code> 是一个常数。例如：<span class="arithmatex">\(n^2\)</span>, <span class="arithmatex">\(n^{100}\)</span>都是多项式。</li>
+<li><strong>指数函数 (Exponentials)</strong> ：形如<span class="arithmatex">\(a^n\)</span>的函数，其中 <code>a</code> 是一个大于 1 的常数。例如：<span class="arithmatex">\(2^n\)</span>, <span class="arithmatex">\(1.1^n\)</span>都是指数函数。</li>
+</ul>
+<p>对于多项式函数和指数函数，如果a &gt; 1，那么我们有：</p>
+<div class="arithmatex">\[
+\lim_{n \to \infty} \frac{n^b}{a^n} = 0
+\]</div>
+<p>这个极限公式表明当n趋向于无穷大时，一个多项式函数和一个指数函数的比值会趋近于0。这意味着分母的增长速度远快于分子的增长速度，因此在极限情况下他们的比值几乎为0。</p>
+<p>通过这个我们可以得到如下推论：</p>
+<div class="arithmatex">\[
+n^b = O\!\left(a^n\right)
+\]</div>
+<p>即指数函数一定是多项式函数的上限。（在a&gt;1的情况下）</p>
+<h3 id="_8">指数</h3>
+<h4 id="notation">Notation</h4>
+<ul>
+<li><span class="arithmatex">\(\log_b n = a \iff b^a = n\)</span>  (definition of log)</li>
+<li><span class="arithmatex">\(\ln n = \log_e n\)</span>  (natural log)</li>
+<li><span class="arithmatex">\(\lg n \ \text{or} \ \log n = \log_2 n\)</span>  (base-2 shorthand)</li>
+<li><span class="arithmatex">\(\lg^2 n = (\lg n)(\lg n)\)</span>  (multiplication)</li>
+<li><span class="arithmatex">\(\lg \lg n = (\lg(\lg n))\)</span>  (composition)</li>
+</ul>
+<h4 id="properties">Properties</h4>
+<ul>
+<li><span class="arithmatex">\((a^m)^n = a^{mn}\)</span></li>
+<li><span class="arithmatex">\(a^m \cdot a^n = a^{m+n}\)</span></li>
+<li><span class="arithmatex">\(a^n = 2^{n \lg a}\)</span></li>
+<li><span class="arithmatex">\(a^{\log_b n} = n^{\log_b a}\)</span></li>
+<li><span class="arithmatex">\(\log_b a = \dfrac{\log_c a}{\log_c b}\)</span>  (A way to change from base <span class="arithmatex">\(b\)</span> to base <span class="arithmatex">\(c\)</span>)</li>
+<li><span class="arithmatex">\(\lg ab = \lg a + \lg b\)</span></li>
+<li><span class="arithmatex">\(\lg(a^x) = x \lg a\)</span></li>
+<li><span class="arithmatex">\(\lg(1/a) = -\lg a\)</span></li>
+</ul>
+<h3 id="quantifiers">Quantifiers</h3>
+<p>Quantifiers就是量词，用来限定一个陈述在某个集合中是对全部成立，抑或是对至少有一个成立。</p>
+<ul>
+<li><strong>Universal Quantifier (<span class="arithmatex">\(\forall\)</span>):</strong> The symbol <span class="arithmatex">\(\forall\)</span> is used to express that a statement holds for every element in a given set. For example:</li>
+</ul>
+<p>$$
+  \forall x \in \mathbb{R}, \; x^2 \geq 0
+  $$
+- <strong>Existential Quantifier (<span class="arithmatex">\(\exists\)</span>):</strong> The symbol <span class="arithmatex">\(\exists\)</span> is used to express that there exists at least one element in a given set for which a statement holds. For example:</p>
+<p>$$
+  \exists x \in \mathbb{R} \;\; \text{such that} \;\; x^2 = 4
+  $$</p>
+<p>简单来说：</p>
+<ul>
+<li><strong><code>∀</code> (任意)：</strong> 要求很高，必须对集合里<strong>所有</strong>成员都成立才算对。<code>∀</code> 符号看起来像一个倒过来的字母 "A"，可以联想英文单词 "<strong>A</strong>ll" (所有)。</li>
+<li><strong><code>∃</code> (存在)：</strong> 要求很低，只需要在集合里找到<strong>至少一个</strong>符合条件的成员就算对。<code>∃</code> 符号看起来像一个反过来的字母 "E"，可以联想英文单词 "<strong>E</strong>xists" (存在)。</li>
+</ul>
+<p>这两个符号在定义数学概念（比如我们之前讨论的 Big O 定义）和进行逻辑证明时非常关键。</p>
+<h3 id="summation-formulas">Summation Formulas</h3>
+<p>求和公式</p>
+<h4 id="arithmetic-series">Arithmetic series</h4>
+<p>等差数列求和公式</p>
+<p>For integer <span class="arithmatex">\(n \geq 1\)</span>, we have</p>
+<div class="arithmatex">\[
+1 + 2 + \dots + n \;=\; \sum_{k=0}^n k 
+\;=\; \frac{n(n+1)}{2}
+\]</div>
+<h4 id="geometric-series">Geometric series</h4>
+<p>等比数列求和公式</p>
+<p>For real <span class="arithmatex">\(r \neq 1\)</span>, we have</p>
+<div class="arithmatex">\[
+1 + r + r^2 + \dots + r^k \;=\; \sum_{i=0}^k r^i
+\;=\; \frac{1 - r^{k+1}}{1-r}
+\]</div>
+<p>When the summation is infinite and <span class="arithmatex">\(|r| &lt; 1\)</span>, we have</p>
+<div class="arithmatex">\[
+1 + r + r^2 + \dots \;=\; \sum_{i=0}^{\infty} r^i
+\;=\; \frac{1}{1-r}
+\]</div>
+<h3 id="_9">离散数学和集合</h3>
+<p>Let <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> be sets.</p>
+<p>Union并集，Intersection交集，Difference差集：</p>
+<ul>
+<li><strong>Union:</strong> <span class="arithmatex">\(A \cup B =\)</span> The set of elements that appear in either <span class="arithmatex">\(A\)</span> or <span class="arithmatex">\(B\)</span> or both.</li>
+<li><strong>Intersection:</strong><span class="arithmatex">\(A \cap B =\)</span> The set of elements that appear in both <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>.</li>
+<li><strong>Difference:</strong><span class="arithmatex">\(A \setminus B\)</span> or <span class="arithmatex">\(A - B =\)</span> The set of elements that appear in <span class="arithmatex">\(A\)</span> and not in <span class="arithmatex">\(B\)</span>.</li>
+</ul>
+<p>基数：（集合A中元素的个数）</p>
+<ul>
+<li><strong>Cardinality:</strong><span class="arithmatex">\(|A| =\)</span> The number of elements in <span class="arithmatex">\(A\)</span>.</li>
+</ul>
+<p>阶乘</p>
+<ul>
+<li><strong>Factorial:</strong> The notation <span class="arithmatex">\(n!\)</span> is read “<span class="arithmatex">\(n\)</span> factorial” and is defined for integer <span class="arithmatex">\(n &gt; 0\)</span> as follows:</li>
+</ul>
+<p>$$
+  n! = 1 \times 2 \times \dots \times (n-1) \times n
+  $$</p>
+<p>By convention, <span class="arithmatex">\(0! = 1\)</span>.</p>
+<p>Choose选择，Permutations排列，Combinations组合：</p>
+<ul>
+<li><strong>“Choose”:</strong> The notation <span class="arithmatex">\(\binom{n}{k}\)</span> is read “<span class="arithmatex">\(n\)</span> choose <span class="arithmatex">\(k\)</span>” because it represents the number of ways to choose <span class="arithmatex">\(k\)</span> items from <span class="arithmatex">\(n\)</span> distinct items.For integers <span class="arithmatex">\(0 \leq k \leq n\)</span>, we have:</li>
+</ul>
+<p>$$
+  \binom{n}{k} = \frac{n!}{k!(n-k)!}
+  = \binom{n}{n-k}
+  $$
+- <strong>Permutations and Combinations:</strong>
+  In a set of elements <span class="arithmatex">\(A\)</span>, the number of ordered permutations of all <span class="arithmatex">\(|A|\)</span> elements is <span class="arithmatex">\(|A|!\)</span>.
+  The number of combinations of <span class="arithmatex">\(k\)</span> elements is</p>
+<p>$$
+  \binom{|A|}{k}.
+  $$</p>
+<p>排列和组合的最重要区别就是：排列中顺序很重要，而组合中顺序不重要。比如ABC和CAB是两种不同的排列，但是却是2同一个组合。</p>
+<h3 id="probability">Probability</h3>
+<ul>
+<li><strong>Random Variables:</strong>In probability theory, a <em>random variable</em> is a variable whose possible values are outcomes of a random phenomenon.For example, let <span class="arithmatex">\(X\)</span> represent the outcome of rolling a six-sided die.<span class="arithmatex">\(X\)</span> can take values <span class="arithmatex">\(\{1,2,3,4,5,6\}\)</span>.</li>
+<li><strong>Notation:</strong><span class="arithmatex">\(P(X = 5) = \tfrac{1}{6}\)</span> means “The probability that <span class="arithmatex">\(X\)</span> takes the value <span class="arithmatex">\(5\)</span> is <span class="arithmatex">\(\tfrac{1}{6}\)</span>.”</li>
+</ul>
+<p>Expectation 期望</p>
+<ul>
+<li><strong>Expectation:</strong>
+  The <em>expectation</em> (or mean) of a random variable <span class="arithmatex">\(X\)</span> is denoted by <span class="arithmatex">\(E[X]\)</span> and represents the average value it takes.
+  For a discrete random variable, it is computed as:</li>
+</ul>
+<p>$$
+  E[X] = \sum_x x \cdot P(X = x)
+  $$</p>
+<p>where the sum is taken over all possible values of <span class="arithmatex">\(X\)</span>.</p>
+<p><strong>Example:</strong>
+Consider a fair six-sided die. Let <span class="arithmatex">\(X\)</span> be the outcome of a single roll.
+The expectation of <span class="arithmatex">\(X\)</span> is:</p>
+<div class="arithmatex">\[
+E[X] = \tfrac{1}{6}(1) + \tfrac{1}{6}(2) + \tfrac{1}{6}(3) + \tfrac{1}{6}(4) + \tfrac{1}{6}(5) + \tfrac{1}{6}(6) 
+= \tfrac{7}{2}
+\]</div>
+<p>Properties of Expectation:</p>
+<ul>
+<li><span class="arithmatex">\(E[aX + b] = aE[X] + b\)</span> for constants <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>.</li>
+<li><span class="arithmatex">\(E[X + Y] = E[X] + E[Y]\)</span> for independent random variables <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span>.</li>
+</ul>
+<h3 id="ceilings-and-floors">Ceilings and Floors</h3>
+<ul>
+<li><span class="arithmatex">\(\lceil x \rceil = \text{ceiling}(x) =\)</span> the least integer greater than or equal to <span class="arithmatex">\(x\)</span></li>
+<li><span class="arithmatex">\(\lfloor x \rfloor = \text{floor}(x) =\)</span> the greatest integer less than or equal to <span class="arithmatex">\(x\)</span></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

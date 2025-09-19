@@ -1,0 +1,1697 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="刘杰夫">
+      
+      
+        <link rel="canonical" href="https://jeffliulab.github.io/cs-notes/algorithms/2_recurrence/">
+      
+      
+        <link rel="prev" href="../1_intro/">
+      
+      
+        <link rel="next" href="../3_ranndomized_algorithms/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Ch2.算法递归式 - 刘杰夫的计算机科学笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="刘杰夫的计算机科学笔记" class="md-header__button md-logo" aria-label="刘杰夫的计算机科学笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            刘杰夫的计算机科学笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ch2.算法递归式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="刘杰夫的计算机科学笔记" class="md-nav__button md-logo" aria-label="刘杰夫的计算机科学笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    刘杰夫的计算机科学笔记
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    算法导论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            算法导论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Ch2.算法递归式
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch2.算法递归式
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 算法递归式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 算法递归式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 分治思想
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 算法递归式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 例：矩阵乘法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-substitution-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Substitution Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Substitution Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 代入法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 例题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-recursion-tree-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Recursion-tree Method 递归树法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-master-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Master Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Master Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 主方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 例解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-akra-bazzi-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Akra-Bazzi Method
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_ranndomized_algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch3.随机化算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch4.排序算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_order_statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch5.顺序统计量
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算理论
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            计算理论
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computational_theory/ch0_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch1.序言与概论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../computational_theory/ch1_regular_languages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ch2.正则语言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 算法递归式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 算法递归式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 分治思想
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 算法递归式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 例：矩阵乘法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-substitution-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Substitution Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Substitution Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 代入法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 例题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-recursion-tree-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Recursion-tree Method 递归树法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-master-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Master Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Master Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 主方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 例解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-akra-bazzi-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Akra-Bazzi Method
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">算法递归式</h1>
+<h2 id="1">1. 算法递归式</h2>
+<h3 id="11">1.1 分治思想</h3>
+<p>分治法（Divide and Conquer）是一种高效地算法设计策略，能够得到渐进意义上高效的算法，其核心思想就是把一个大问题分解为若干个小问题（或者说子问题），然后递归求解，把子问题的解组合起来得到原问题的解 。</p>
+<p>分治通常包含三个步骤 ：</p>
+<ol>
+<li><strong>Divide 分解：</strong> 将原问题拆分成规模更小的子问题</li>
+<li><strong>Conquer 解决：</strong> 递归地解决这些子问题。如果子问题足够小到base case，则直接解决。</li>
+<li><strong>Combine 合并：</strong> 将子问题的解组合成原问题的解。</li>
+</ol>
+<p>递归会在遇到base case的时候停下来，也即bottoms out（递归到头）。</p>
+<hr />
+<h3 id="12">1.2 算法递归式</h3>
+<p>递归式本身是一个数学概念，在数学领域（特别是离散数学中）用来定义一个数字序列。他的典型特征就是：序列中的每一项都是由它前面的一项或几项来决定的。最经典的例子就是斐波那契数列了：</p>
+<div class="arithmatex">\[
+F(n) = F(n-1) + F(n-2)
+\]</div>
+<div class="arithmatex">\[
+\text{base case: } F(0) = 0,\; F(1) = 1
+\]</div>
+<p>在算法领域中，对于普通算法，我们直接考虑算法本身的循环就能得到运行次数；但是对于递归算法，或者说分治、归并等，我们会发现代码会调用自身，从而让分析代码运行效率变得艰难。比如说，归并排序的运行时间式这么写的：</p>
+<div class="arithmatex">\[
+T(n) = 2T\!\left(\tfrac{n}{2}\right) + O(n)
+\]</div>
+<p>就是。</p>
+<p>这就是<strong>递归式（Recurrence）</strong>或者说<strong>算法递归式（Algorithmic Recurrences）</strong>。这个式子的意思是：</p>
+<ul>
+<li>规模为n的问题的运行时间是T(n)</li>
+<li>该问题会被划分为2个规模为n/2的子问题，即2T(n/2)</li>
+<li>最后加上分解问题+合并结果的代价，其时间复杂度是线性时间O(n)</li>
+</ul>
+<p><strong>一个标准的算法递归式由两部分组成：</strong></p>
+<ul>
+<li><strong>Base Case 基本情况：</strong> 对于足够小的问题规模<span class="arithmatex">\(n\)</span>（一般来说，小于某个阈值<span class="arithmatex">\(n_0\)</span>），其解决问题的时间是一个常数，也即：</li>
+</ul>
+<div class="arithmatex">\[
+T(n) = \Theta(1) \quad \text{for } n &lt; n_{0}
+\]</div>
+<ul>
+<li><strong>Recursive Step 递归步骤：</strong> 对于较大的问题规模<span class="arithmatex">\(n\)</span>，其运行时间由分解出的子问题的运行时间和分解/合并步骤自身的时间共同定义：</li>
+</ul>
+<div class="arithmatex">\[
+T(n) = (\text{子问题的成本}) + (\text{分解与合并的成本})
+\]</div>
+<p><strong>一个算法递归式必须满足以下基本属性：</strong></p>
+<ul>
+<li>必须有基本情况，且这个基本情况在常数范围内。</li>
+<li>递归必须在有限步内终止，这是算法正确性（Correctnness）的基本要求。</li>
+</ul>
+<p>一个递归式可能有零个、一个或者多个解。如果至少存在一个解，它是well defined（良定义）的；否则是ill defined（不良定义）的。</p>
+<p>很显然，如果我们想了解这个递归式的具体时间复杂度，我们就必须借助一些额外的工具来完成。一般我们会使用归纳法（Induction）或者主方法（Master Method）等，在后面的部分中我们会详细讲解各个方法的适用情况和使用方式。</p>
+<hr />
+<h3 id="13">1.3 例：矩阵乘法</h3>
+<p>我们来看一个例子，来了解算法递归式是如何清晰地记录算法在解决问题上的策略和其效率的。</p>
+<p>比如说，我们的目标是计算矩阵A和矩阵B的乘法，来得到C：</p>
+<p>矩阵 A：</p>
+<div class="arithmatex">\[
+A = \begin{pmatrix}
+1 &amp; 2 &amp; 3 &amp; 4 \\
+5 &amp; 6 &amp; 7 &amp; 8 \\
+9 &amp; 1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6 &amp; 7
+\end{pmatrix}
+\]</div>
+<p>矩阵 B：</p>
+<div class="arithmatex">\[
+B = \begin{pmatrix}
+8 &amp; 7 &amp; 6 &amp; 5 \\
+4 &amp; 3 &amp; 2 &amp; 1 \\
+1 &amp; 2 &amp; 3 &amp; 4 \\
+5 &amp; 6 &amp; 7 &amp; 8
+\end{pmatrix}
+\]</div>
+<p>计算两个 <code>n x n</code> 方阵的乘积 <code>C = A · B</code>。矩阵 C 中的每一个元素 <code>c_ij</code> 通过以下公式计算：</p>
+<div class="arithmatex">\[
+c_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}
+\]</div>
+<p><strong>假设:</strong> 这里的算法处理的都是<strong>稠密矩阵 (dense matrices)</strong>，即大部分元素都不是 0。</p>
+<p>如果我们用最直观的直接乘法，即用三层for循环来实现的话，我们的时间复杂度是<span class="arithmatex">\(\Theta(n^3\)</span>)。</p>
+<pre><code>MATRIX-MULTIPLY(A, B, C, n)
+1  for i = 1 to n
+2      for j = 1 to n
+3          for k = 1 to n
+4              c_ij = c_ij + a_ik · b_kj
+</code></pre>
+<p>但是如果我们用分治的思路，把大矩阵分解为小矩阵，则可以用递归的方式来求解：</p>
+<ol>
+<li>分解（Divide）：将 4x4 的 A 和 B 矩阵，都分解成 4 个 2x2 的子矩阵。</li>
+<li>解决（Conquer）：对这些 2x2 的子矩阵进行乘法和加法运算，以计算出结果 C 的 4 个 2x2 子矩阵。</li>
+<li>合并（Combine）：将计算出的 4 个 2x2 子矩阵拼接成最终的 4x4 结果矩阵 C。</li>
+</ol>
+<p>分解如下：</p>
+<div class="arithmatex">\[
+A = \begin{pmatrix}
+A_{11} &amp; A_{12} \\
+A_{21} &amp; A_{22}
+\end{pmatrix},
+\quad
+B = \begin{pmatrix}
+B_{11} &amp; B_{12} \\
+B_{21} &amp; B_{22}
+\end{pmatrix}
+\]</div>
+<div class="arithmatex">\[
+其中，\;
+A_{11} = \begin{pmatrix}
+1 &amp; 2 \\
+5 &amp; 6
+\end{pmatrix}, \quad
+B_{11} = \begin{pmatrix}
+8 &amp; 7 \\
+4 &amp; 3
+\end{pmatrix}，\;\text{以此类推。}
+\]</div>
+<p>然后解决：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+C_{11} &amp;= A_{11}B_{11} + A_{12}B_{21} \\
+C_{12} &amp;= A_{11}B_{12} + A_{12}B_{22} \\
+C_{21} &amp;= A_{21}B_{11} + A_{22}B_{21} \\
+C_{22} &amp;= A_{21}B_{12} + A_{22}B_{22}
+\end{aligned}
+\]</div>
+<p>请注意，这里需要进行 <strong>8 次</strong> 2x2 矩阵的乘法（递归调用）和 4 次 2x2 矩阵的加法。</p>
+<p>综上，我们可以得到算法递归式：</p>
+<div class="arithmatex">\[
+T(n) = 8T\!\left(\tfrac{n}{2}\right) + \Theta(n^2)
+\]</div>
+<ul>
+<li><code>8T(n/2)</code>: 代表 8 次规模为一半的子问题（矩阵乘法）的成本。</li>
+<li><code>Θ(n²)</code>: 代表 4 次子矩阵加法的成本（两个 n/2 x n/2 矩阵相加需要 n²/4 次标量加法）。</li>
+</ul>
+<p>这个方法可以使用主方法分析（后面会讲到），得到其算法的效率为<span class="arithmatex">\(\Theta(n^3)\)</span>，即没有带来渐进意义上的效率提升。在这个问题中，分治法的瓶颈在于8次递归调用。</p>
+<p>如果我们用更少的递归调用次数来完成任务，那么我们就可以在渐进意义上获得效率提升。<strong>Strassen算法</strong>就是用来解决这个问题的，它通过巧妙的代数运算，将递归次数从8次减少到了7次，从而实现了更高的效率。</p>
+<p>由于Strassen算法实现不是这里的重点，因此具体的方法就不展开描述了。本部分的核心与重点在于了解递归式。接下来我们来看一下，如何用一些工具和技巧，由递归式出发，快速了解一个算法递归式的实际效率。</p>
+<hr />
+<h2 id="2-substitution-method">2. Substitution Method</h2>
+<h3 id="21">2.1 代入法</h3>
+<p>代入法（Substitution Method）是一个用来严格证明递归式解的数学工具。它包含两个核心步骤：</p>
+<ol>
+<li>Guess，即提出假说：观察一个递归式，根据经验或者别的工具，猜测一个它可能的时间复杂度，比如<span class="arithmatex">\(O(nlogn)\)</span>。</li>
+<li>Prove, 即进行验证：使用数学归纳法（最严谨的数学工具）来证明这个假说在数学上是站得住脚的。</li>
+</ol>
+<p>代入法的好处在于，无论递归式长什么样子，只要你能猜对，那么原则上都可以用它来证明。</p>
+<p>代入法的难点在于猜测，一个好的猜测可以让我们事半功倍。一般猜测策略主要有三种：</p>
+<ul>
+<li><strong>类比法</strong> ：看看这个递归式和你已经知道解的某个经典递归式（比如归并排序）像不像。如果很像，它们的解也很可能是一样的。</li>
+<li><strong>递归树法 (最常用)</strong> ：画出递归树，观察每一层成本的分布和树的总层数，通常能得出一个非常精准的猜测。</li>
+<li><strong>上下界法</strong> ：先确定一个宽松的下界（比如 <code>Ω(n)</code>）和一个宽松的上界（比如 <code>O(n²)</code>），然后逐步向中间“挤压”，缩小范围。</li>
+</ul>
+<hr />
+<p>猜测后，我们就用数学归纳法进行证明（这是代入法操作的核心）。假设你已经猜出解是 <span class="arithmatex">\(O(n \log n)\)</span>：</p>
+<p><strong>1. 明确证明目标：</strong></p>
+<ul>
+<li>将你的猜测 <span class="arithmatex">\(O(n \log n)\)</span> 翻译成一个包含具体常数 <span class="arithmatex">\(c\)</span> 的不等式。</li>
+<li><strong>目标</strong>：证明存在常数 <span class="arithmatex">\(c &gt; 0\)</span> 和 <span class="arithmatex">\(n_0\)</span>，使得对于所有 <span class="arithmatex">\(n \geq n_0\)</span>，都有 <span class="arithmatex">\(T(n) \leq c n \log n\)</span> 成立。</li>
+<li><strong>关键！</strong> 绝不能在假设里使用 <span class="arithmatex">\(O\)</span> 符号，否则无法进行证明。</li>
+</ul>
+<p><strong>2. 写出归纳假设：</strong></p>
+<ul>
+<li>假设对于所有小于 <span class="arithmatex">\(n\)</span> 的值 <span class="arithmatex">\(k\)</span>，目标不等式都成立。
+  即：
+  $$
+  T(k) \leq c k \log k
+  $$</li>
+</ul>
+<p><strong>3. 代入并推导：</strong></p>
+<ul>
+<li>将递归式中的 <span class="arithmatex">\(T(\dots)\)</span> 项用你的归纳假设替换掉。</li>
+</ul>
+<p>例如，对于 <span class="arithmatex">\(T(n) = 2T(n/2) + n\)</span>：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;= 2T(n/2) + n \\[6pt]
+     &amp;\leq 2\bigl(c(n/2)\log(n/2)\bigr) + n \quad (\text{进行代入}) \\[6pt]
+     &amp;= cn(\log n - \log 2) + n \\[6pt]
+     &amp;= cn \log n - cn + n
+\end{aligned}
+\]</div>
+<p><strong>4. 验证结论：</strong></p>
+<ul>
+<li>检查推导结果是否 <strong>小于等于</strong> 你的目标 <span class="arithmatex">\(c n \log n\)</span>。</li>
+</ul>
+<p>即：</p>
+<div class="arithmatex">\[
+cn \log n - cn + n \;\leq\; cn \log n
+\]</div>
+<p>化简得：</p>
+<div class="arithmatex">\[
+-cn + n \leq 0 \quad \Leftrightarrow \quad n \leq c n \quad \Rightarrow \quad c \geq 1
+\]</div>
+<p>这告诉我们：只要常数 <span class="arithmatex">\(c \geq 1\)</span>，归纳证明就能成功。</p>
+<p><strong>5. 处理基本情况 (Base Case)：</strong></p>
+<ul>
+<li>最后，确保你的不等式在一些小的初始值 (比如 <span class="arithmatex">\(n=2,3\)</span>) 上也成立。</li>
+<li>通常，只要把常数 <span class="arithmatex">\(c\)</span> 选得足够大，总能满足基本情况。</li>
+</ul>
+<hr />
+<p>既然该方法起始于猜测，那么自然就有猜错的时候，也即证明失败的时候。比如说，对于 <code>T(n) = 2T(n/2) + 1</code>，猜测 <code>T(n) = O(n)</code>：</p>
+<ul>
+<li>设置目标 <code>T(n) ≤ cn</code>。</li>
+<li>代入后得到 <code>T(n) ≤ cn + 1</code>。</li>
+<li>你永远无法证明 <code>cn + 1 ≤ cn</code>。证明失败。</li>
+</ul>
+<p>这个失败通常意味着你的假设“不够强”，无法在递归中传递下去。这个时候我们可以从猜测中 <strong>减去一个低阶项</strong>，然后我们的目标就变成了证明 <code>T(n) ≤ cn - d</code>，其中 <code>d</code> 是一个待定的正常数。那么这个为什么有效呢？</p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;= 2T(n/2) + 1 \\[6pt]
+     &amp;\leq 2\bigl(c(n/2) - d\bigr) + 1 \quad \text{（代入新假设）} \\[6pt]
+     &amp;= cn - 2d + 1
+\end{aligned}
+\]</div>
+<p>即，新验证要求我们证明 <code>cn - 2d + 1 ≤ cn - d</code>，这等价于 <code>-2d + 1 ≤ -d</code>，即 <code>1 ≤ d</code>。只要我们选择一个常数 <code>d ≥ 1</code>（比如 <code>d=1</code>），证明就成功了！<strong>其原理在于</strong> ：我们减去的 <code>-d</code> 在递归代入时，被递归系数 <code>a=2</code> <strong>放大</strong>成了 <code>-2d</code>。这个被放大的“负能量”足以抵消掉那个导致我们证明失败的 <code>+1</code>。</p>
+<hr />
+<h3 id="22">2.2 例题</h3>
+<p><strong>a.</strong></p>
+<div class="arithmatex">\[
+T(n) = T(n-1) + n \quad \Rightarrow \quad T(n) = O(n^2)
+\]</div>
+<p><strong>1. 明确目标：</strong>
+我们要证明 <span class="arithmatex">\(T(n) = O(n^2)\)</span>。
+根据定义，我们需要找到常数 <span class="arithmatex">\(c &gt; 0\)</span> 和 <span class="arithmatex">\(n_0\)</span>，使得对于所有 <span class="arithmatex">\(n \geq n_0\)</span>，都有</p>
+<div class="arithmatex">\[
+T(n) \leq c n^2
+\]</div>
+<p>成立。</p>
+<p><strong>2. 归纳假设：</strong>
+假设对于所有小于 <span class="arithmatex">\(n\)</span> 的值 <span class="arithmatex">\(k\)</span>，结论都成立。即：</p>
+<div class="arithmatex">\[
+T(k) \leq c k^2
+\]</div>
+<p>特别地，对于 <span class="arithmatex">\(k = n-1\)</span>：</p>
+<div class="arithmatex">\[
+T(n-1) \leq c(n-1)^2
+\]</div>
+<p><strong>3. 代入并推导：</strong>
+将归纳假设代入原递归式：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;= T(n-1) + n \\[6pt]
+     &amp;\leq c(n-1)^2 + n \\[6pt]
+     &amp;= c(n^2 - 2n + 1) + n \\[6pt]
+     &amp;= c n^2 - 2cn + c + n
+\end{aligned}
+\]</div>
+<p><strong>4. 验证结论：</strong>
+我们的目标是证明上式 <span class="arithmatex">\(\leq c n^2\)</span>：</p>
+<div class="arithmatex">\[
+c n^2 - 2cn + c + n \;\leq\; c n^2
+\]</div>
+<p>化简得：</p>
+<div class="arithmatex">\[
+-2cn + c + n \leq 0 \quad \Longleftrightarrow \quad n(1 - 2c) + c \leq 0
+\]</div>
+<p>为了让这个不等式对足够大的 <span class="arithmatex">\(n\)</span> 恒成立，<span class="arithmatex">\(n\)</span> 的系数 <span class="arithmatex">\((1-2c)\)</span> 必须为负。</p>
+<ul>
+<li><span class="arithmatex">\(1 - 2c &lt; 0 \;\;\Longleftrightarrow\;\; c &gt; 1/2\)</span></li>
+</ul>
+<p>因此，只要我们选择 <span class="arithmatex">\(c &gt; 1/2\)</span>（例如 <span class="arithmatex">\(c=1\)</span>），当 <span class="arithmatex">\(n\)</span> 足够大时，这个式子就恒成立。</p>
+<p><strong>5. 结论：</strong>
+我们成功找到了满足条件的常数（例如 <span class="arithmatex">\(c=1\)</span>），因此证明了：</p>
+<div class="arithmatex">\[
+T(n) = O(n^2)
+\]</div>
+<hr />
+<p><strong>b.</strong></p>
+<div class="arithmatex">\[
+T(n) = T(n/2) + \Theta(1) \quad \Rightarrow \quad T(n) = O(\lg n)
+\]</div>
+<p><strong>1. 明确目标：</strong>
+我们将 <span class="arithmatex">\(\Theta(1)\)</span> 写为常数 <span class="arithmatex">\(d\)</span>。目标是证明存在常数 <span class="arithmatex">\(c &gt; 0\)</span> 和 <span class="arithmatex">\(n_0\)</span>，使得对于 <span class="arithmatex">\(n \geq n_0\)</span>，都有</p>
+<div class="arithmatex">\[
+T(n) \leq c \lg n.
+\]</div>
+<p><strong>2. 归纳假设：</strong>
+假设对于所有 <span class="arithmatex">\(k &lt; n\)</span>，都有</p>
+<div class="arithmatex">\[
+T(k) \leq c \lg k.
+\]</div>
+<p><strong>3. 代入推导：</strong></p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;= T(n/2) + d \\[6pt]
+     &amp;\leq c \lg (n/2) + d \\[6pt]
+     &amp;= c(\lg n - 1) + d \\[6pt]
+     &amp;= c \lg n - c + d
+\end{aligned}
+\]</div>
+<p><strong>4. 验证结论：</strong>
+我们需要证明</p>
+<div class="arithmatex">\[
+c \lg n - c + d \leq c \lg n,
+\]</div>
+<p>这需要 <span class="arithmatex">\(-c + d \leq 0\)</span>，即</p>
+<div class="arithmatex">\[
+c \geq d.
+\]</div>
+<p>只要我们选择的证明常数 <span class="arithmatex">\(c\)</span> 大于等于 <span class="arithmatex">\(o(1)\)</span> 中的常数 <span class="arithmatex">\(d\)</span>，归纳就成立。</p>
+<hr />
+<p><strong>c.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T(n/2) + n \quad \Rightarrow \quad T(n) = \Theta(n \lg n)
+\]</div>
+<p>我们需要分别证明 <span class="arithmatex">\(O(n \lg n)\)</span> 和 <span class="arithmatex">\(\Omega(n \lg n)\)</span>。</p>
+<p><strong>证明上界 <span class="arithmatex">\(O(n \lg n)\)</span>：</strong></p>
+<ol>
+<li><strong>目标：</strong> 证明 <span class="arithmatex">\(T(n) \leq c_2 n \lg n\)</span>。</li>
+<li><strong>假设：</strong> 对 <span class="arithmatex">\(k &lt; n\)</span>，有 <span class="arithmatex">\(T(k) \leq c_2 k \lg k\)</span>。</li>
+<li><strong>代入：</strong>
+   $$
+   T(n) \leq 2\bigl(c_2 (n/2) \lg (n/2)\bigr) + n 
+        = c_2 n \lg n - c_2 n + n
+   $$</li>
+<li><strong>验证：</strong> 我们需要
+   $$
+   c_2 n \lg n - c_2 n + n \leq c_2 n \lg n,
+   $$</li>
+</ol>
+<p>即 <span class="arithmatex">\(-c_2 n + n \leq 0\)</span>，这要求 <span class="arithmatex">\(c_2 \geq 1\)</span>。</p>
+<p><strong>证明下界 <span class="arithmatex">\(\Omega(n \lg n)\)</span>：</strong></p>
+<ol>
+<li><strong>目标：</strong> 证明 <span class="arithmatex">\(T(n) \geq c_1 n \lg n\)</span>。</li>
+<li><strong>假设：</strong> 对 <span class="arithmatex">\(k &lt; n\)</span>，有 <span class="arithmatex">\(T(k) \geq c_1 k \lg k\)</span>。</li>
+<li><strong>代入：</strong>
+   $$
+   T(n) \geq 2\bigl(c_1 (n/2) \lg (n/2)\bigr) + n
+        = c_1 n \lg n - c_1 n + n
+   $$</li>
+<li><strong>验证：</strong> 我们需要
+   $$
+   c_1 n \lg n - c_1 n + n \geq c_1 n \lg n,
+   $$</li>
+</ol>
+<p>即 <span class="arithmatex">\(-c_1 n + n \geq 0\)</span>，这要求 <span class="arithmatex">\(c_1 \leq 1\)</span>。</p>
+<p><strong>结论：</strong>
+因为我们既可以证明上界，也可以证明下界，所以</p>
+<div class="arithmatex">\[
+T(n) = \Theta(n \lg n)
+\]</div>
+<p>成立。</p>
+<hr />
+<p><strong>d.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T(n/2 + 17) + n \quad \Rightarrow \quad T(n) = O(n \lg n)
+\]</div>
+<p><strong>1. 明确目标：</strong>
+证明存在常数 <span class="arithmatex">\(c &gt; 0\)</span> 和 <span class="arithmatex">\(n_0\)</span>，使得</p>
+<div class="arithmatex">\[
+T(n) \leq c n \lg n.
+\]</div>
+<p><strong>2. 归纳假设：</strong>
+假设对所有 <span class="arithmatex">\(k &lt; n\)</span>，都有</p>
+<div class="arithmatex">\[
+T(k) \leq c k \lg k.
+\]</div>
+<p><strong>3. 代入推导：</strong></p>
+<div class="arithmatex">\[
+T(n) \leq 2\bigl(c(n/2 + 17)\lg(n/2 + 17)\bigr) + n
+\]</div>
+<p>这里的 <span class="arithmatex">\(+17\)</span> 比较棘手，但对于足够大的 <span class="arithmatex">\(n\)</span>，它是一个低阶项。我们可以观察到 <span class="arithmatex">\(n/2 + 17\)</span> 不会比 <span class="arithmatex">\(n\)</span> 大，并且 <span class="arithmatex">\(\lg\)</span> 是一个增长很慢的函数。我们可以放心地说，对于足够大的 <span class="arithmatex">\(n\)</span>：</p>
+<div class="arithmatex">\[
+c(n/2 + 17)\lg(n/2 + 17) \approx c(n/2)\lg(n/2)
+\]</div>
+<p>因此，代数推导过程与上一个问题 <span class="arithmatex">\(c\)</span> 非常相似：</p>
+<div class="arithmatex">\[
+T(n) \leq c n \lg n - c n + n + (\text{一些低阶项})
+\]</div>
+<p><strong>4. 验证结论：</strong>
+为了使不等式成立，我们需要 <span class="arithmatex">\(-cn\)</span> 能够“压制”住 <span class="arithmatex">\(+n\)</span> 和其他所有因 <span class="arithmatex">\(+17\)</span> 产生的低阶项。只要 <span class="arithmatex">\(n\)</span> 足够大，<span class="arithmatex">\(-cn + n\)</span> 这一项是主导的。因此，我们只需要</p>
+<div class="arithmatex">\[
+-cn + n \leq 0 \quad \Rightarrow \quad c \geq 1
+\]</div>
+<p>选择一个足够大的 <span class="arithmatex">\(c\)</span> 即可。</p>
+<hr />
+<p><strong>e.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T(n/3) + \Theta(n) \quad \Rightarrow \quad T(n) = \Theta(n)
+\]</div>
+<p>我们将 <span class="arithmatex">\(\Theta(n)\)</span> 写为 <span class="arithmatex">\(dn\)</span>。</p>
+<p><strong>证明下界 <span class="arithmatex">\(\Omega(n)\)</span>：</strong>
+这一步很简单，因为递归式中包含了 <span class="arithmatex">\(+dn\)</span> 这一项，所以 <span class="arithmatex">\(T(n)\)</span> 至少是 <span class="arithmatex">\(dn\)</span>，因此</p>
+<div class="arithmatex">\[
+T(n) = \Omega(n)
+\]</div>
+<p>天然成立。</p>
+<p><strong>证明上界 <span class="arithmatex">\(O(n)\)</span>：</strong></p>
+<ol>
+<li><strong>目标：</strong> 证明 <span class="arithmatex">\(T(n) \leq cn\)</span>。</li>
+<li><strong>假设：</strong> 对 <span class="arithmatex">\(k &lt; n\)</span>，有 <span class="arithmatex">\(T(k) \leq ck\)</span>。</li>
+<li><strong>代入：</strong></li>
+</ol>
+<p>$$
+   \begin{aligned}
+   T(n) &amp;= 2T(n/3) + dn \[6pt]
+        &amp;\leq 2\bigl(c(n/3)\bigr) + dn \[6pt]
+        &amp;= (2c/3)n + dn \[6pt]
+        &amp;= (2c/3 + d)n
+   \end{aligned}
+   $$
+4. <strong>验证：</strong> 我们需要</p>
+<p>$$
+   (2c/3 + d)n \leq cn,
+   $$</p>
+<p>即</p>
+<p>$$
+   2c/3 + d \leq c.
+   $$</p>
+<ul>
+<li><span class="arithmatex">\(d \leq c - 2c/3 \;\;\Rightarrow\;\; d \leq c/3 \;\;\Rightarrow\;\; c \geq 3d\)</span>。</li>
+<li>只要我们选择的 <span class="arithmatex">\(c\)</span> 至少是 <span class="arithmatex">\(d\)</span> 的 3 倍，证明就成立。</li>
+</ul>
+<p><strong>结论：</strong>
+因为上下界都成立，所以</p>
+<div class="arithmatex">\[
+T(n) = \Theta(n).
+\]</div>
+<hr />
+<p><strong>f.</strong></p>
+<div class="arithmatex">\[
+T(n) = 4T(n/2) + \Theta(n) \quad \Rightarrow \quad T(n) = \Theta(n^2)
+\]</div>
+<p>我们将 <span class="arithmatex">\(\Theta(n)\)</span> 写为 <span class="arithmatex">\(dn\)</span>。</p>
+<p><strong>证明下界 <span class="arithmatex">\(\Omega(n^2)\)</span>：</strong></p>
+<ol>
+<li><strong>目标：</strong> 证明 <span class="arithmatex">\(T(n) \geq c_1 n^2\)</span>。</li>
+<li><strong>假设：</strong> 对 <span class="arithmatex">\(k &lt; n\)</span>，有 <span class="arithmatex">\(T(k) \geq c_1 k^2\)</span>。</li>
+<li><strong>代入：</strong>
+   $$
+   T(n) \geq 4\bigl(c_1 (n/2)^2\bigr) + dn = c_1 n^2 + dn
+   $$</li>
+<li><strong>验证：</strong> 我们需要 <span class="arithmatex">\(c_1 n^2 + dn \geq c_1 n^2\)</span>。因为 <span class="arithmatex">\(dn\)</span> 是正数，这个不等式显然成立。</li>
+</ol>
+<p><strong>证明上界 <span class="arithmatex">\(O(n^2)\)</span>：</strong></p>
+<ol>
+<li><strong>目标：</strong> 证明 <span class="arithmatex">\(T(n) \leq c_2 n^2\)</span>。</li>
+<li><strong>假设：</strong> 对 <span class="arithmatex">\(k &lt; n\)</span>，有 <span class="arithmatex">\(T(k) \leq c_2 k^2\)</span>。</li>
+<li><strong>代入：</strong></li>
+</ol>
+<p>$$
+   T(n) \leq 4\bigl(c_2 (n/2)^2\bigr) + dn = c_2 n^2 + dn
+   $$
+4. <strong>验证：</strong> 我们需要 <span class="arithmatex">\(c_2 n^2 + dn \leq c_2 n^2\)</span>，即 <span class="arithmatex">\(dn \leq 0\)</span>，这不可能成立。证明失败。
+5. <strong>强化假设：</strong> 我们尝试证明</p>
+<p>$$
+   T(n) \leq c_2 n^2 - c_3 n.
+   $$
+6. <strong>新假设：</strong> 对 <span class="arithmatex">\(k &lt; n\)</span>，有 <span class="arithmatex">\(T(k) \leq c_2 k^2 - c_3 k\)</span>。
+7. <strong>新代入：</strong></p>
+<p>$$
+   \begin{aligned}
+   T(n) &amp;\leq 4\bigl(c_2 (n/2)^2 - c_3 (n/2)\bigr) + dn \[6pt]
+        &amp;= c_2 n^2 - 2c_3 n + dn
+   \end{aligned}
+   $$
+8. <strong>新验证：</strong> 我们需要</p>
+<p>$$
+   c_2 n^2 - 2c_3 n + dn \leq c_2 n^2 - c_3 n,
+   $$</p>
+<p>即</p>
+<p>$$
+   -2c_3 n + dn \leq -c_3 n \quad \Rightarrow \quad dn \leq c_3 n \quad \Rightarrow \quad c_3 \geq d.
+   $$</p>
+<p>只要我们选择的常数 <span class="arithmatex">\(c_3\)</span> 大于等于 <span class="arithmatex">\(d\)</span>，证明就成立。</p>
+<p><strong>结论：</strong>
+因为上下界都成立，所以</p>
+<div class="arithmatex">\[
+T(n) = \Theta(n^2).
+\]</div>
+<hr />
+<h2 id="3-recursion-tree-method">3. Recursion-tree Method 递归树法</h2>
+<p>(这个部分有空稍微整理一下，笔记有点乱)</p>
+<p>递归树法是一种强大的直观工具，主要用于<strong>为代入法生成一个好的猜测</strong> 💡。</p>
+<p><strong>核心思想 (Core Idea) 🌳</strong></p>
+<p>递归树将一个递归式<strong>可视化</strong>。在树中，每个节点代表递归调用中产生的单个子问题的成本。</p>
+<p><strong>求解过程:</strong></p>
+<ol>
+<li><strong>展开树结构：</strong> 将递归式展开成一棵树，直到叶子节点。</li>
+<li><strong>计算每层成本：</strong> 将树的每一层的所有节点的成本相加，得到该层的总成本。</li>
+<li><strong>累加所有层：</strong> 将所有层的成本（包括叶子节点）全部加起来，得到整个递归式的总成本。</li>
+</ol>
+<hr />
+<p><strong>示例：求解 T(n) = 3T(n/4) + cn²</strong></p>
+<p><strong>1. 用递归树法得出猜测 (Making a Guess with the Recursion Tree)</strong></p>
+<p><strong>树的结构分析:</strong></p>
+<ul>
+<li><strong>第 0 层 (根节点):</strong> 成本是 <code>cn²</code>。</li>
+<li><strong>第 1 层:</strong> 有 <strong>3</strong> 个子节点，该层总成本为 <code>3 * c(n/4)² = (3/16)cn²</code>。</li>
+<li><strong>第 i 层 (一般情况):</strong> 有 <code>3^i</code> 个节点，该层总成本为 <code>(3/16)^i * cn²</code>。</li>
+<li><strong>树的高度:</strong> 树高 <code>h = log₄n</code>。</li>
+<li><strong>叶子节点:</strong> 共有 <code>n^(log₄3)</code> 个叶子，叶子层的总成本为 <code>Θ(n^(log₄3))</code>。</li>
+</ul>
+<p><img alt="1758058290134" src="../image/2_divide_conquer/1758058290134.png" /></p>
+<p><strong>计算总代价:</strong>
+我们将所有层的成本加起来，得到一个几何级数：</p>
+<div class="arithmatex">\[
+T(n) = \sum_{i=0}^{\log_4n-1} \left(\frac{3}{16}\right)^i cn^2 + \Theta(n^{\log_43})
+\]</div>
+<p>我们可以用一个无限递减几何级数的和来为这个求和提供一个上界：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;&lt; \left(\sum_{i=0}^{\infty} \left(\frac{3}{16}\right)^i \right) cn^2 + \Theta(n^{\log_43}) \\
+&amp;= \frac{1}{1 - 3/16} cn^2 + \Theta(n^{\log_43}) \\
+&amp;= \frac{16}{13} cn^2 + \Theta(n^{\log_43})
+\end{aligned}
+\]</div>
+<p>因为 <code>log₄3 ≈ 0.79</code>，所以 <code>n^(log₄3)</code> 是一个比 <code>n²</code> 低阶的项。</p>
+<p><strong>得出猜测:</strong>
+树的总成本由根节点的成本 <code>cn²</code> 主导。因此，我们得出一个合理的猜测：<code>T(n) = O(n²)</code>。</p>
+<hr />
+<p><strong>2. 用代入法验证猜测 (Verifying the Guess with the Substitution Method) ✅</strong></p>
+<p>现在，我们用<strong>代入法</strong>来严格证明我们从递归树得到的猜测 <code>T(n) = O(n²)</code> 是正确的。</p>
+<p><strong>这个界是紧确的吗？</strong>
+是的。因为原递归式 <code>T(n) = 3T(n/4) + Θ(n²)</code> 中包含 <code>Θ(n²)</code> 这一项，所以解的下界必然是 <code>Ω(n²)</code>。如果一个解既是 <code>O(n²)</code> 又是 <code>Ω(n²)</code>，那么它就是 <code>Θ(n²)</code>。</p>
+<p><strong>归纳证明:</strong>
+我们要证明 <code>T(n) = O(n²)</code>。</p>
+<p><strong>归纳假设:</strong> <code>T(n) ≤ dn²</code>，对于某个我们待选择的常数 <code>d &gt; 0</code> 成立。（这里用 <code>d</code> 是为了和递归式中已有的 <code>c</code> 区分开）。</p>
+<p><strong>归纳步骤:</strong>
+将假设代入递归式 <code>T(n) ≤ 3T(n/4) + cn²</code>：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;\le 3(d(n/4)^2) + cn^2 \\
+&amp;= 3d\frac{n^2}{16} + cn^2 \\
+&amp;= \frac{3}{16}dn^2 + cn^2 \\
+&amp;= \left(\frac{3}{16}d + c\right) n^2
+\end{aligned}
+\]</div>
+<p>我们的目标是证明上式 <code>≤ dn²</code>。这个条件成立，当且仅当：</p>
+<div class="arithmatex">\[
+\frac{3}{16}d + c \le d
+\]</div>
+<p>解这个关于 <code>d</code> 的不等式：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+c &amp;\le d - \frac{3}{16}d \\
+c &amp;\le \frac{13}{16}d \\
+d &amp;\ge \frac{16}{13}c
+\end{aligned}
+\]</div>
+<p><strong>结论:</strong>
+因为 <code>c</code> 是递归式给定的一个常数，我们<strong>完全可以自由选择</strong>一个常数 <code>d</code> 只要它满足 <code>d ≥ (16/13)c</code>。同时我们也可以选择一个足够大的 <code>d</code> 来覆盖基本情况。因此，归纳假设成立。</p>
+<p>我们成功地证明了 <code>T(n) = O(n²)</code>。</p>
+<hr />
+<p>3.2 不规则例子</p>
+<p>让我们来分析一个更复杂的、<strong>不平衡</strong>的递归式(An Irregular Example)。</p>
+<p><strong>递归式:</strong></p>
+<div class="arithmatex">\[
+T(n) = T(n/3) + T(2n/3) + \Theta(n)
+\]</div>
+<p>由于 <code>1/3 + 2/3 = 1</code>，这个递归式看起来很特别。它的递归树左右子树的深度不同，不是一棵“完美”的树。</p>
+<p><img alt="1758059996429" src="../image/2_divide_conquer/1758059996429.png" /></p>
+<hr />
+<p><strong>1. 分析内部节点成本 (Analyzing Internal Node Cost) 💻</strong></p>
+<p><strong>树的高度 (Height):</strong>
+树的高度由<strong>最长的路径</strong>决定，也就是每次都选择较大子问题（<code>2n/3</code>）的路径。这条最右侧路径的长度 <code>h</code> 满足 <code>(2/3)^h * n ≈ 1</code>，解得 <code>h = log_{3/2}n</code>。因此，树的高度是 <code>Θ(lg n)</code>。</p>
+<p><strong>每层成本 (Cost Per Level):</strong>
+一个有趣的现象是，这棵树的<strong>每一层的成本之和都是 <code>cn</code></strong>。</p>
+<ul>
+<li>第 0 层: <code>cn</code></li>
+<li>第 1 层: <code>c(n/3) + c(2n/3) = cn</code></li>
+<li>第 2 层: <code>c(n/9) + c(2n/9) + c(2n/9) + c(4n/9) = cn</code></li>
+<li>...以此类推，直到最深的叶子出现前，每层成本都恰好是 <code>cn</code>。</li>
+</ul>
+<p><strong>内部节点总成本 (Total Internal Cost):</strong>
+我们将每层的成本 <code>cn</code> 乘以树的高度 <code>Θ(lg n)</code>，可以得出一个简单的上界：</p>
+<div class="arithmatex">\[
+\text{内部节点总成本} = O(n \lg n)
+\]</div>
+<p><strong>2. 分析叶子节点成本 (Analyzing Leaf Node Cost) 🌿</strong></p>
+<p>现在，我们需要计算所有叶子节点的总成本，这需要我们先知道叶子的数量。</p>
+<p><strong>叶子数量的递归式 (Recurrence for Number of Leaves):</strong>
+我们可以为叶子的数量 <code>L(n)</code> 建立一个新的、更简单的递归式。当问题足够小时，它就是一个叶子（成本为1）。否则，叶子的总数就是其左右子树的叶子数之和。</p>
+<div class="arithmatex">\[
+L(n) = L(n/3) + L(2n/3) \quad (\text{当 } n \text{ 足够小时，} L(n)=1)
+\]</div>
+<p><strong>求解 L(n):</strong>
+使用代入法，我们可以很容易地证明 <code>L(n) = O(n)</code>。（假设 <code>L(k) ≤ dk</code>，则 <code>L(n) ≤ d(n/3) + d(2n/3) = dn</code>）。</p>
+<p><strong>叶子节点总成本 (Total Leaf Cost):</strong>
+叶子节点的总成本是叶子数量乘以每个叶子的成本（<code>Θ(1)</code>）。</p>
+<div class="arithmatex">\[
+\text{叶子节点总成本} = O(n) \cdot \Theta(1) = O(n)
+\]</div>
+<hr />
+<p><strong>3. 得出最终猜测 (Reaching the Final Guess) ✨</strong></p>
+<p><strong>总成本 (Total Cost):</strong>
+将内部节点和叶子节点的成本相加：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+T(n) &amp;= (\text{内部节点成本}) + (\text{叶子节点成本}) \\
+&amp;= O(n \lg n) + O(n)
+\end{aligned}
+\]</div>
+<p><code>O(n lg n)</code> 这一项是主导项。</p>
+<p><strong>最终猜测:</strong></p>
+<div class="arithmatex">\[
+T(n) = \Theta(n \lg n)
+\]</div>
+<p><strong>重要提示:</strong> 递归树法得出的猜测非常可靠，但为了保证数学上的严谨性，最后总应该用<strong>代入法</strong>来正式验证它。</p>
+<hr />
+<h2 id="4-master-method">4. Master Method</h2>
+<h3 id="41">4.1 主方法</h3>
+<p>Master Method（主方法）也可以用来求解特定形式的递归关系式。</p>
+<p>在上面的讲解中，我们介绍了代入法（归纳法）来求解递归式，该方法更为通用，但是需要先猜测解的形式，且过程相对繁琐。而本节我们来介绍一个更为强大的“公式”，即Master Method。但是 这个方法并不适用于所有情况。</p>
+<p>主方法 (Master Method) 提供了一个“食谱”式的强大工具，用于快速求解特定形式的算法递归式。这个标准形式是：</p>
+<div class="arithmatex">\[
+T(n) = aT\!\left(\tfrac{n}{b}\right) + f(n)
+\]</div>
+<p>其中，<code>a ≥ 1</code> 是子问题的数量，<code>b &gt; 1</code> 是子问题规模的缩减因子，<code>f(n)</code> 是在每一步中分解问题和合并结果的成本。</p>
+<p>主方法的核心思想是比较两股“力量”的增长速度，看哪一方最终主导了算法的总成本。这两股力量是：</p>
+<ol>
+<li><strong>“分枝成本” (Watershed Function - 分水岭函数)</strong> : 由递归的<strong>分枝数量和深度</strong>决定，其函数形式为<span class="arithmatex">\(n^{log_b{a}}\)</span>。这代表了所有递归调用累积起来的成本，可以理解为递归树中<strong>叶子节点</strong>的总工作量。</li>
+<li><strong>“单步成本” (Driving Function - 驱动函数)</strong> : 即<span class="arithmatex">\(f(n\)</span>) 。这代表了<strong>单次调用</strong>中用于分解和合并的成本，可以理解为递归树中<strong>根节点</strong>的工作量。</li>
+</ol>
+<p>算法的最终复杂度，就取决于这场拔河比赛的结果。显然，结果有三种：</p>
+<ul>
+<li>Watershed Function获胜</li>
+<li>平局</li>
+<li>Driving Function获胜</li>
+</ul>
+<p>总结如下：</p>
+<table>
+<thead>
+<tr>
+<th>情况（Case）</th>
+<th>情况一（Case 1）</th>
+<th>情况二（Case 2）</th>
+<th>情况三（Case 3）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>核心对比</strong></td>
+<td><span class="arithmatex">\(f(n)\)</span> 远慢于 <span class="arithmatex">\(n^{\log_b a}\)</span></td>
+<td><span class="arithmatex">\(f(n)\)</span> 约等于 <span class="arithmatex">\(n^{\log_b a}\)</span></td>
+<td><span class="arithmatex">\(f(n)\)</span> 远快于 <span class="arithmatex">\(n^{\log_b a}\)</span></td>
+</tr>
+<tr>
+<td><strong>“拔河”结果</strong></td>
+<td>递归分枝成本获胜</td>
+<td>势均力敌</td>
+<td>单步分解/合并成本获胜</td>
+</tr>
+<tr>
+<td><strong>最终结果</strong></td>
+<td><span class="arithmatex">\(\Theta \bigl(n^{\log_b a}\bigr)\)</span></td>
+<td><span class="arithmatex">\(\Theta \bigl(n^{\log_b a} \log n\bigr)\)</span> （通用版 <span class="arithmatex">\(\log^{k+1} n\)</span>）</td>
+<td><span class="arithmatex">\(\Theta \bigl(f(n)\bigr)\)</span> （需满足正则条件）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="42">4.2 例解</h3>
+<p>举例几个例子说明以下主方法如何使用：</p>
+<p><strong>a.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T\!\left(\tfrac{n}{4}\right) + 1
+\]</div>
+<ol>
+<li>
+<p><strong>分析：</strong></p>
+</li>
+<li>
+<p><span class="arithmatex">\(f(n) = 1\)</span></p>
+</li>
+<li>比较 <span class="arithmatex">\(f(n) = 1\)</span> 和 <span class="arithmatex">\(n^{\log_b a} = \sqrt{n}\)</span>。</li>
+<li>很明显，<span class="arithmatex">\(f(n)\)</span> 的增长速度远慢于 <span class="arithmatex">\(\sqrt{n}\)</span>。严格来说，<span class="arithmatex">\(f(n) = 1 = O(n^{0.5 - \varepsilon})\)</span>，例如我们可以取 <span class="arithmatex">\(\varepsilon = 0.5\)</span>。</li>
+<li>这符合主方法的 <strong>情况一 (Case 1)</strong>。</li>
+<li>
+<p><strong>结论：</strong></p>
+</li>
+<li>
+<p>总成本由 <span class="arithmatex">\(n^{\log_b a}\)</span> 决定。</p>
+</li>
+<li>
+<div class="arithmatex">\[
+     T(n) = \Theta\!\bigl(n^{\log_b a}\bigr) = \Theta(\sqrt{n})
+     \]</div>
+</li>
+</ol>
+<hr />
+<p><strong>b.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T\!\left(\tfrac{n}{4}\right) + \sqrt{n}
+\]</div>
+<ol>
+<li>
+<p><strong>分析：</strong></p>
+</li>
+<li>
+<p><span class="arithmatex">\(f(n) = \sqrt{n}\)</span></p>
+</li>
+<li>比较 <span class="arithmatex">\(f(n) = \sqrt{n}\)</span> 和 <span class="arithmatex">\(n^{\log_b a} = \sqrt{n}\)</span>。</li>
+<li>两者渐近相等。严格来说，<span class="arithmatex">\(f(n) = \Theta\!\bigl(n^{1/2}\log^0 n\bigr)\)</span>，即 <span class="arithmatex">\(k = 0\)</span>。</li>
+<li>这符合主方法的 <strong>情况二 (Case 2)</strong>。</li>
+<li>
+<p><strong>结论：</strong></p>
+</li>
+<li>
+<p>总成本需要在原有基础上<strong>追加一个对数因子</strong>。</p>
+</li>
+<li>
+<div class="arithmatex">\[
+     T(n) = \Theta\!\bigl(n^{\log_b a}\log^{k+1} n\bigr)
+          = \Theta\!\bigl(\sqrt{n}\log^{0+1} n\bigr)
+          = \Theta\!\bigl(\sqrt{n}\lg n\bigr)
+     \]</div>
+</li>
+</ol>
+<hr />
+<p><strong>c.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T\!\left(\tfrac{n}{4}\right) + \sqrt{n}\,\lg^{2}n
+\]</div>
+<ol>
+<li>
+<p><strong>分析：</strong></p>
+</li>
+<li>
+<p><span class="arithmatex">\(f(n) = \sqrt{n}\,\lg^2 n\)</span></p>
+</li>
+<li>比较 <span class="arithmatex">\(f(n) = \sqrt{n}\,\lg^2 n\)</span> 和 <span class="arithmatex">\(n^{\log_b a} = \sqrt{n}\)</span>。</li>
+<li><span class="arithmatex">\(f(n)\)</span> 的增长速度比 <span class="arithmatex">\(n^{\log_b a}\)</span> 要快，但它只是快了一个对数因子（<span class="arithmatex">\(\lg^2 n\)</span>），并不是<strong>多项式级别</strong>的快。因此，它不满足情况三的条件。</li>
+<li>我们再来看情况二的通用形式：<span class="arithmatex">\(f(n) = \Theta\!\bigl(n^{\log_b a}\log^k n\bigr)\)</span>。</li>
+<li>这里，<span class="arithmatex">\(f(n) = \Theta\!\bigl(\sqrt{n}\log^2 n\bigr)\)</span>，即 <span class="arithmatex">\(k = 2\)</span>。</li>
+<li>这依然符合主方法的 <strong>情况二 (Case 2)</strong>。</li>
+<li>
+<p><strong>结论：</strong></p>
+</li>
+<li>
+<p>总成本需要在原有基础上追加一个对数因子。</p>
+</li>
+<li>
+<div class="arithmatex">\[
+     T(n) = \Theta\!\bigl(n^{\log_b a}\log^{k+1} n\bigr)
+          = \Theta\!\bigl(\sqrt{n}\log^{2+1} n\bigr)
+          = \Theta\!\bigl(\sqrt{n}\lg^3 n\bigr)
+     \]</div>
+</li>
+</ol>
+<hr />
+<p><strong>d.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T\!\left(\tfrac{n}{4}\right) + n
+\]</div>
+<ol>
+<li>
+<p><strong>分析：</strong></p>
+</li>
+<li>
+<p><span class="arithmatex">\(f(n) = n\)</span></p>
+</li>
+<li>比较 <span class="arithmatex">\(f(n) = n\)</span> 和 <span class="arithmatex">\(n^{\log_b a} = \sqrt{n}\)</span>。</li>
+<li><span class="arithmatex">\(f(n)\)</span> 的增长速度远快于 <span class="arithmatex">\(\sqrt{n}\)</span>。严格来说，<span class="arithmatex">\(f(n) = n^1 = \Omega(n^{0.5+\varepsilon})\)</span>，我们可以取 <span class="arithmatex">\(\varepsilon = 0.5\)</span>。</li>
+<li>这满足了主方法的 <strong>情况三 (Case 3)</strong> 的第一个条件。</li>
+<li>我们还需要检查<strong>正则条件</strong>：<span class="arithmatex">\(a f(n/b) \leq c f(n)\)</span> 是否对某个 <span class="arithmatex">\(c &lt; 1\)</span> 成立。<ul>
+<li><span class="arithmatex">\(2 \cdot f(n/4) \leq c \cdot n\)</span></li>
+<li><span class="arithmatex">\(2 \cdot (n/4) \leq c \cdot n\)</span></li>
+<li><span class="arithmatex">\(n/2 \leq c \cdot n\)</span></li>
+<li><span class="arithmatex">\(1/2 \leq c\)</span></li>
+</ul>
+</li>
+<li>我们可以选择 <span class="arithmatex">\(c = 1/2\)</span>（或 <span class="arithmatex">\(0.6, 0.9\)</span> 等），这满足 <span class="arithmatex">\(1/2 \leq c &lt; 1\)</span>。所以正则条件成立。</li>
+<li>
+<p><strong>结论：</strong></p>
+</li>
+<li>
+<p>总成本由 <span class="arithmatex">\(f(n)\)</span> 决定。</p>
+</li>
+<li>
+<div class="arithmatex">\[
+     T(n) = \Theta(f(n)) = \Theta(n)
+     \]</div>
+</li>
+</ol>
+<hr />
+<p><strong>e.</strong></p>
+<div class="arithmatex">\[
+T(n) = 2T\!\left(\tfrac{n}{4}\right) + n^2
+\]</div>
+<ol>
+<li>
+<p><strong>分析：</strong></p>
+</li>
+<li>
+<p><span class="arithmatex">\(f(n) = n^2\)</span></p>
+</li>
+<li>比较 <span class="arithmatex">\(f(n) = n^2\)</span> 和 <span class="arithmatex">\(n^{\log_b a} = \sqrt{n}\)</span>。</li>
+<li><span class="arithmatex">\(f(n)\)</span> 的增长速度远快于 <span class="arithmatex">\(\sqrt{n}\)</span>。严格来说，<span class="arithmatex">\(f(n) = n^2 = \Omega(n^{0.5+\varepsilon})\)</span>，我们可以取 <span class="arithmatex">\(\varepsilon = 1.5\)</span>。</li>
+<li>这同样满足主方法的 <strong>情况三 (Case 3)</strong> 的第一个条件。</li>
+<li>我们再检查<strong>正则条件</strong>：<span class="arithmatex">\(a f(n/b) \leq c f(n)\)</span> 是否对某个 <span class="arithmatex">\(c &lt; 1\)</span> 成立。<ul>
+<li><span class="arithmatex">\(2 \cdot f(n/4) \leq c \cdot n^2\)</span></li>
+<li><span class="arithmatex">\(2 \cdot (n/4)^2 \leq c \cdot n^2\)</span></li>
+<li><span class="arithmatex">\(2 \cdot (n^2/16) \leq c \cdot n^2\)</span></li>
+<li><span class="arithmatex">\(n^2/8 \leq c \cdot n^2\)</span></li>
+<li><span class="arithmatex">\(1/8 \leq c\)</span></li>
+</ul>
+</li>
+<li>我们可以选择 <span class="arithmatex">\(c = 1/8\)</span>（或 <span class="arithmatex">\(0.5, 0.9\)</span> 等），这满足 <span class="arithmatex">\(1/8 \leq c &lt; 1\)</span>。所以正则条件也成立。</li>
+<li>
+<p><strong>结论：</strong></p>
+</li>
+<li>
+<p>总成本由 <span class="arithmatex">\(f(n)\)</span> 决定。</p>
+</li>
+<li>
+<div class="arithmatex">\[
+     T(n) = \Theta(f(n)) = \Theta(n^2)
+     \]</div>
+</li>
+</ol>
+<p>.</p>
+<hr />
+<h2 id="5-akra-bazzi-method">5. Akra-Bazzi Method</h2>
+<p>主方法的主要限制是，它要求所有子问题的规模都是相等的，即都是 <code>n/b</code>。Akra-Bazzi 方法放宽了这一限制，它可以处理多个<strong>规模不同</strong>的子问题。比如下面这种形式：</p>
+<div class="arithmatex">\[
+T(n) = \sum_{i=1}^{k} a_i \, T\!\left(\tfrac{n}{b_i}\right) + f(n)
+\]</div>
+<p>该方法也称为广义递归式，即Master Theorem的扩展形式。感兴趣的同学可以阅读书上相关部分，我的笔记只记录最重要和核心的内容，对于高级用法，只作提及，就不展开讲了。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
