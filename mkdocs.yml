@@ -24,12 +24,11 @@ theme:
 nav:
   - 首页: index.md
   - 算法导论:
-    - Ch1.序言与概论: CLRS/1_intro.md
-    - Ch2.分治与递归: CLRS/2_divide_conquer.md
-    - Ch3.概率分析和随机算法: CLRS/3_randomized_algorithms.md
-    - Ch4.排序算法: CLRS/4_sort.md
-  - 计算机网络:
-    - Ch1.序言与概论: networks/1_intro.md 
+    - Ch1.序言与概论: algorithms/1_intro.md
+    - Ch2.算法递归式: algorithms/2_recurrence.md
+    - Ch3.随机化算法: algorithms/3_ranndomized_algorithms.md
+    - Ch4.排序算法: algorithms/4_sort.md
+    - Ch5.顺序统计量: algorithms/5_order_statistics.md
   - 计算理论:
     - Ch1.序言与概论: computational_theory/ch0_intro.md
     - Ch2.正则语言: computational_theory/ch1_regular_languages.md

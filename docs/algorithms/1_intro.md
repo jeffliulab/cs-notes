@@ -1,45 +1,5 @@
 # 算法导论：序言与概论
 
-## CS160课程特别栏目（临时）
-
-### 得分与考试
-
-Final Grade:
-
-* `25% Homework + 5% Participation + 20% Midterm1 + 20% Midterm2 + 30% Final`
-* `25% Homework + 5% Participation + 15% Midterm1 + 15% Midterm2 + 40% Final`
-
-Exams:
-
-* Midterm1
-* Midterm2
-* Final
-
-同样的，禁止使用AI工具，会被视为作弊。
-
-### 作业要求
-
-包含：
-
-* Description
-* Justification
-* Time analysis
-* Space analysis
-
-平时整理笔记的时候可以写pseudocode，但是这门课的作业中不需要给出pseudocode
-
-### 本门课程的证明要求
-
-参见文件 How to write proofs，有时间整理一下，写在这里，用于提交作业和考试。
-
-### 关于本笔记
-
-本笔记在这学期暂时用于课程学习，课程结束后将删除关于课程的内容，而仅保留算法知识。
-
-本笔记的目的不仅仅是完成上面这门课，而是要借此机会整理关于算法的思想和笔记。
-
-以下是分割线，分割线下方是一般性内容，分割线上方的部分是关于这门课的特别部分。
-
 ---
 
 ## 算法简介
